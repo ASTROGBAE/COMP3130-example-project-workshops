@@ -1,9 +1,6 @@
 import { StyleSheet, View } from 'react-native';
-
-import AppText from './app/components/AppText';
-import AppColors from './app/config/AppColors'; // TODO find better config for this?
-import AppButton from './app/components/AppButton'; // TODO find better config for this?
 import LoginScreen from './app/screens/LoginScreen';
+import AppColors from './app/config/AppColors';
 
 // custom components
 
