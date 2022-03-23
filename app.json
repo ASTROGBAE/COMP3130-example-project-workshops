@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "COMP3130-project-workshop-v2",
+    "slug": "COMP3130-project-workshop-v2",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
