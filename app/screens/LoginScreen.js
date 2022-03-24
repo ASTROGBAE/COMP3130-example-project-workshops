@@ -15,6 +15,7 @@ function LoginScreen(props) {
         <AppScreen style={styles.container}>
             <View>
                 <AppText>Imagine</AppText>
+                <AppButton>Click here!</AppButton>
                 <StatusBar style="auto" />
             </View>
             <AppTextInput // appText input
@@ -31,7 +32,7 @@ function LoginScreen(props) {
 
 const styles = StyleSheet.create({
     containter:{
-        
+
     }
 })
 
