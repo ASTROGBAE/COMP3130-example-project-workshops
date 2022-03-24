@@ -9,7 +9,6 @@ import AppText from '../components/AppText';
 function AppTextInput() {
     return (
         <View style={styles.container}>
-            <Text>Sup</Text>
             {/* <MaterialCommunityIcons 
             name = {icon} 
             size={22}

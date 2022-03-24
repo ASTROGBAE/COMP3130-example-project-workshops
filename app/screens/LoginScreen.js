@@ -7,11 +7,12 @@ import AppText from '../components/AppText';
 import AppColors from '../config/AppColors'; 
 import AppButton from '../components/AppButton'; 
 import AppTextInput from '../components/AppTextInput';
+import AppScreen from '../components/AppScreen';
 
 function LoginScreen(props) {
     //const [user, setUser] = useState();
     return (
-        <View style={styles.container}>
+        <AppScreen style={styles.container}>
             <View>
                 <AppText>Imagine</AppText>
                 <StatusBar style="auto" />
@@ -24,17 +25,14 @@ function LoginScreen(props) {
                 keyboardType="email-address"
                 textContentType="emailAddress"
             />
-        </View>
+        </AppScreen>
     );
 }
 
-export default LoginScreen;
-
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: AppColors.primary,
-        alignItems: 'center',
-        justifyContent: 'center',
-      },
-    });
+    containter:{
+        
+    }
+})
+
+export default LoginScreen;

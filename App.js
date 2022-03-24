@@ -6,7 +6,7 @@ import AppColors from './app/config/AppColors';
 
 export default function App() {
   return (
-    <View>
+    <View style={styles.container}>
       <LoginScreen/>
     </View>
   );
@@ -15,8 +15,5 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: AppColors.primary,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 });
