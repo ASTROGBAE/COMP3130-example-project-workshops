@@ -15,17 +15,19 @@ function LoginScreen(props) {
         <AppScreen style={styles.container}>
             <View>
                 <AppText>Imagine</AppText>
-                <AppButton>Click here!</AppButton>
                 <StatusBar style="auto" />
             </View>
-            <AppTextInput // appText input
+            <View>
+                <AppButton title="Click here!"/>
+            </View>
+            {/* <AppTextInput // appText input
                 autoCapitalize="none"
                 autoCorrect={false}
                 icon="email"
                 placeholder="Email Address"
                 keyboardType="email-address"
                 textContentType="emailAddress"
-            />
+            /> */}
         </AppScreen>
     );
 }

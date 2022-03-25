@@ -3,12 +3,9 @@ import React from "react";
 import { Text, StyleSheet, View } from "react-native";
 import AppColors from "../config/AppColors";
 
-function AppText(props) {
+function AppText(props, customStyle) {
     return (
-        <View>
-            <Text style={styles.text}>
-                {props.children}</Text>
-        </View>
+        <Text style={[customStyle, styles.text]}>{props.children}</Text>
     );
 }
 

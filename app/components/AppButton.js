@@ -1,18 +1,16 @@
 import React from "react";
-import { Alert, Text, StyleSheet, Button, TouchableOpacity, View } from "react-native";
+import { Alert, Text, StyleSheet, TouchableOpacity, View } from "react-native";
 
 import AppColors from "../config/AppColors";
+import AppText from "./AppText";
 
-function AppButton(props) {
+function AppButton({title,onPress}) {
     return (
-        <View>
-            <Button // TODO use touchable opacity and view objects instead of button as its not very customisable
-                onPress={() => Alert.alert('Simple Button pressed')}
-                title={props.children}
-                //color
-                accessibilityLabel="Learn more about this purple button"
-            />
-        </View>
+        <TouchableOpacity>
+            <View style={styles.button}>
+                    <Text style={[styles.text, AppText.styles]}>{title}</Text>
+            </View>
+        </TouchableOpacity>
     );
 }
 
@@ -20,9 +18,12 @@ export default AppButton;
 
 const styles = StyleSheet.create({
     button: {
-        color: AppColors.secondary,
+        backgroundColor: AppColors.primary,
         borderRadius: 50,
-        padding: 10,
-        marginTop:10,
+        padding: 15,
+        width: '100%',
+    },
+    text: {
+        fontSize:16
     }
 });
