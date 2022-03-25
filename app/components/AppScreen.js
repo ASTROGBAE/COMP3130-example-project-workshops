@@ -17,7 +17,6 @@ const styles = StyleSheet.create({
         flex:1,
         marginTop: Constants.statusBarHeight,
         backgroundColor: AppColors.primary,
-        alignItems: 'center',
         justifyContent: 'center',
     }
 })

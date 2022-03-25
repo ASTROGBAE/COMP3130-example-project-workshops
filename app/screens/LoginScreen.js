@@ -11,7 +11,7 @@ import {MaterialCommunityIcons} from '@expo/vector-icons'
 function LoginScreen(props) {
     //const [user, setUser] = useState();
     return (
-        <AppScreen style={styles.container}>
+        <AppScreen>
             <View>
                 <MaterialCommunityIcons name={'account'} size={22}/>
                 <AppText>Imagine</AppText>
