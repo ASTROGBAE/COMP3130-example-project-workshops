@@ -24,7 +24,7 @@ function LoginScreen(props) {
         <AppScreen>
             <View style={styles.background}>
                 <MaterialCommunityIcons name={'account'} size={80} color={AppColors.white}/>
-                <AppText>Login</AppText>
+                <AppText title={'Login'}/>
                 <StatusBar style="auto" />
 
                 <Formik
@@ -43,7 +43,7 @@ function LoginScreen(props) {
                             textContentType="emailAddress"
                             onChangeText = {handleChange("email")}
                         />
-                        <AppText>{errors.email}</AppText>
+                        <AppText title={errors.email} style={{color:'red', fontSize:16}}/>
                         <AppTextInput // password
                             autoCapitalize="none"
                             autoCorrect={false}
@@ -53,7 +53,7 @@ function LoginScreen(props) {
                             textContentType="password"
                             onChangeText = {handleChange("password")}
                         />
-                        <AppText>{errors.password}</AppText>
+                        <AppText title={errors.password} style={{color:'red', fontSize:16}}/>
                         <AppButton onPress={handleSubmit} title="Submit" />
                     </View>
                     )}
@@ -69,6 +69,9 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         width:"100%"
+    },
+    errorText:{
+        color:'red'
     }
 })
 
