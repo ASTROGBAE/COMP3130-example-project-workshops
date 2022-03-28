@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import {React} from 'react';
 import { StyleSheet, View} from 'react-native';
-import {Formik} from 'formik';
+import {Formik} from 'formik'; // formik used here!
 import * as yup from 'yup';
 
 import AppText from '../components/AppText';
@@ -32,7 +32,7 @@ function LoginScreen(props) {
                     onSubmit={values => console.log(values)}
                     validationSchema={schema}
                 >
-                    {({ handleChange, handleSubmit, errors }) => (
+                    {({ handleChange, handleSubmit, errors, setFieldTouched, touched }) => (
                     <View>
                         <AppTextInput // email
                             autoCapitalize="none"
@@ -41,9 +41,10 @@ function LoginScreen(props) {
                             placeholder="Email Address"
                             keyboardType="email-address"
                             textContentType="emailAddress"
+                            onBlur= {() => setFieldTouched("email")}
                             onChangeText = {handleChange("email")}
                         />
-                        <AppText title={errors.email} style={{color:'red', fontSize:16}}/>
+                        {touched.email && <AppText title={errors.email} style={{color:'red', fontSize:16}}/>}
                         <AppTextInput // password
                             autoCapitalize="none"
                             autoCorrect={false}
@@ -51,9 +52,10 @@ function LoginScreen(props) {
                             placeholder="Password"
                             secureTextEntry={true}
                             textContentType="password"
+                            onBlur= {() => setFieldTouched("password")}
                             onChangeText = {handleChange("password")}
                         />
-                        <AppText title={errors.password} style={{color:'red', fontSize:16}}/>
+                        {touched.password && <AppText title={errors.password} style={{color:'red', fontSize:16}}/>}
                         <AppButton onPress={handleSubmit} title="Submit" />
                     </View>
                     )}
