@@ -2,6 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import {React} from 'react';
 import { StyleSheet, View} from 'react-native';
 import {Formik} from 'formik';
+import * as yup from 'yup';
 
 import AppText from '../components/AppText';
 import AppButton from '../components/AppButton'; 
@@ -11,6 +12,14 @@ import {MaterialCommunityIcons} from '@expo/vector-icons'
 import AppColors from '../config/AppColors';
 
 function LoginScreen(props) {
+
+    let schema = yup.object().shape( // yup validation stuff
+        {
+            email: yup.string().required().email().label("Email"),
+            password: yup.string().required().min(4).max(8).label("Email"),
+        }
+    );
+
     return (
         <AppScreen>
             <View style={styles.background}>
@@ -21,8 +30,9 @@ function LoginScreen(props) {
                 <Formik
                     initialValues={{ email: '', password:'', }}
                     onSubmit={values => console.log(values)}
+                    validationSchema={schema}
                 >
-                    {({ handleChange, handleBlur, handleSubmit, values }) => (
+                    {({ handleChange, handleSubmit, errors }) => (
                     <View>
                         <AppTextInput // email
                             autoCapitalize="none"
@@ -33,6 +43,7 @@ function LoginScreen(props) {
                             textContentType="emailAddress"
                             onChangeText = {handleChange("email")}
                         />
+                        <AppText>{errors.email}</AppText>
                         <AppTextInput // password
                             autoCapitalize="none"
                             autoCorrect={false}
@@ -42,6 +53,7 @@ function LoginScreen(props) {
                             textContentType="password"
                             onChangeText = {handleChange("password")}
                         />
+                        <AppText>{errors.password}</AppText>
                         <AppButton onPress={handleSubmit} title="Submit" />
                     </View>
                     )}
