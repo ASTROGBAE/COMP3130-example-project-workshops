@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, View, TextInput } from 'react-native';
+import {React} from 'react';
+import { StyleSheet, View} from 'react-native';
 import {Formik} from 'formik';
 
 import AppText from '../components/AppText';
@@ -11,22 +11,41 @@ import {MaterialCommunityIcons} from '@expo/vector-icons'
 import AppColors from '../config/AppColors';
 
 function LoginScreen(props) {
-    //const [user, setUser] = useState();
     return (
         <AppScreen>
             <View style={styles.background}>
                 <MaterialCommunityIcons name={'account'} size={80} color={AppColors.white}/>
                 <AppText>Login</AppText>
                 <StatusBar style="auto" />
-                
-                <AppTextInput // appText input
-                autoCapitalize="none"
-                autoCorrect={false}
-                icon="email"
-                placeholder="Email Address"
-                keyboardType="email-address"
-                textContentType="emailAddress"
-            />
+
+                <Formik
+                    initialValues={{ email: '', password:'', }}
+                    onSubmit={values => console.log(values)}
+                >
+                    {({ handleChange, handleBlur, handleSubmit, values }) => (
+                    <View>
+                        <AppTextInput // email
+                            autoCapitalize="none"
+                            autoCorrect={false}
+                            icon="email"
+                            placeholder="Email Address"
+                            keyboardType="email-address"
+                            textContentType="emailAddress"
+                            onChangeText = {handleChange("email")}
+                        />
+                        <AppTextInput // password
+                            autoCapitalize="none"
+                            autoCorrect={false}
+                            icon="lock"
+                            placeholder="Password"
+                            secureTextEntry={true}
+                            textContentType="password"
+                            onChangeText = {handleChange("password")}
+                        />
+                        <AppButton onPress={handleSubmit} title="Submit" />
+                    </View>
+                    )}
+                </Formik>
             </View>
         </AppScreen>
     );
@@ -36,7 +55,8 @@ const styles = StyleSheet.create({
     background:{
         flex: 1,
         justifyContent: "center",
-        alignItems: "center"
+        alignItems: "center",
+        width:"100%"
     }
 })
 
