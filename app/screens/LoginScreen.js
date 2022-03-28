@@ -6,35 +6,37 @@ import {Formik} from 'formik';
 import AppText from '../components/AppText';
 import AppButton from '../components/AppButton'; 
 import AppScreen from '../components/AppScreen';
+import AppTextInput from '../components/AppTextInput'; 
 import {MaterialCommunityIcons} from '@expo/vector-icons'
+import AppColors from '../config/AppColors';
 
 function LoginScreen(props) {
     //const [user, setUser] = useState();
     return (
         <AppScreen>
-            <View>
-                <MaterialCommunityIcons name={'account'} size={22}/>
-                <AppText>Imagine</AppText>
+            <View style={styles.background}>
+                <MaterialCommunityIcons name={'account'} size={80} color={AppColors.white}/>
+                <AppText>Login</AppText>
                 <StatusBar style="auto" />
-            </View>
-            <View>
-                <AppButton title="Click here!"/>
-            </View>
-            {/* <AppTextInput // appText input
+                
+                <AppTextInput // appText input
                 autoCapitalize="none"
                 autoCorrect={false}
                 icon="email"
                 placeholder="Email Address"
                 keyboardType="email-address"
                 textContentType="emailAddress"
-            /> */}
+            />
+            </View>
         </AppScreen>
     );
 }
 
 const styles = StyleSheet.create({
-    containter:{
-
+    background:{
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center"
     }
 })
 

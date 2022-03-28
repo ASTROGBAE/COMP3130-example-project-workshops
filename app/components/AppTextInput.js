@@ -6,14 +6,11 @@ import {MaterialCommunityIcons} from '@expo/vector-icons'
 import AppColors from '../config/AppColors'; 
 import AppText from '../components/AppText';
 
-function AppTextInput() {
+function AppTextInput({icon, ...otherProps}) {
     return (
         <View style={styles.container}>
-            {/* <MaterialCommunityIcons 
-            name = {icon} 
-            size={22}
-            color= {AppColors.primary}/>
-            <TextInput style={AppText.text} {...otherProps}/> */}
+            {icon && <MaterialCommunityIcons name = {icon} size={22} color= {AppColors.black}/>}
+            <TextInput style={AppText.text} {...otherProps}/>
         </View>
     );
 }
@@ -22,6 +19,7 @@ export default AppTextInput;
 
 const styles = StyleSheet.create({
     container: {
+        backgroundColor: AppColors.white,
         flexDirection: 'row',
         borderRadius: 25,
         padding: 10,
