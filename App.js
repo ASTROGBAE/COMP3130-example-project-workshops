@@ -1,20 +1,16 @@
-import { StyleSheet, View } from 'react-native';
-import LoginScreen from './app/screens/LoginScreen';
-import AppColors from './app/config/AppColors';
-import WelcomeScreen from './app/screens/WelcomeScreen';
+import {React} from 'react';
+
+import 'react-native-gesture-handler';
+
+import { NavigationContainer } from '@react-navigation/native';
+import AuthNavigator from './app/navigation/AuthNavigator';
 
 // custom components
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <LoginScreen />
-    </View>
+    <NavigationContainer>
+      <AuthNavigator/>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
