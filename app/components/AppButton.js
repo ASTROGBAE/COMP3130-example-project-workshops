@@ -7,7 +7,7 @@ import AppText from "./AppText";
 function AppButton({title,onPress}) {
     return (
         <TouchableOpacity onPress={onPress} style={styles.button}>
-                <Text style={[styles.text, AppText.styles]}>{title}</Text>
+            <AppText title={title} style={styles.text}/>
         </TouchableOpacity>
     );
 }
@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
         alignItems:'center',
     },
     text: {
+        color:AppColors.black,
         fontSize:16
     }
 });
