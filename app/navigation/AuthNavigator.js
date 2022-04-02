@@ -8,11 +8,11 @@ import LoginScreen from '../screens/LoginScreen';
 
 const AppStack = createStackNavigator();
 
-function AuthNavigator() {
+function AuthNavigator() { // in options, add option to remove header, set to false
     return (
         <AppStack.Navigator>
-            <AppStack.Screen name="Welcome" component={WelcomeScreen}/>
-            <AppStack.Screen name="Login" component={LoginScreen}/>
+            <AppStack.Screen name="Welcome" component={WelcomeScreen} options={{headerShown:false}}/>
+            <AppStack.Screen name="Login" component={LoginScreen} options={{headerShown:false}}/>
         </AppStack.Navigator>
     );
 }

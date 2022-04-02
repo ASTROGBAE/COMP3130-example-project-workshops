@@ -6,10 +6,12 @@ import AppText from '../components/AppText';
 import AppButton from '../components/AppButton'; 
 import AppScreen from '../components/AppScreen';
 import {MaterialCommunityIcons} from '@expo/vector-icons'
+import { NavigationContainer } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
 const BlurRadiusValue = Platform.OS === 'android' ? 2.5 : 5.5;
 
-function WelcomeScreen(props) {
+function WelcomeScreen({navigation}) {
     return (
         <AppScreen>
             <ImageBackground 
@@ -23,7 +25,8 @@ function WelcomeScreen(props) {
                     <StatusBar style="auto" />
                 </View>
                 <View>
-                    <AppButton title="Click here!"/>
+                    <AppButton title="Click here!" 
+                    onPress={() => navigation.navigate("Login")}/>
                 </View>
             </ImageBackground>
         </AppScreen>

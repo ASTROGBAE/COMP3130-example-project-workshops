@@ -10,8 +10,9 @@ import AppScreen from '../components/AppScreen';
 import AppTextInput from '../components/AppTextInput'; 
 import {MaterialCommunityIcons} from '@expo/vector-icons'
 import AppColors from '../config/AppColors';
+import { useNavigation } from '@react-navigation/native';
 
-function LoginScreen(props) {
+function LoginScreen({navigation}) {
 
     let schema = yup.object().shape( // yup validation stuff
         {
