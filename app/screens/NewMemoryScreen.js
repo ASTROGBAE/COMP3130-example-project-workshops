@@ -12,19 +12,9 @@ import AppClouds from '../components/AppClouds';
 
 // TODO onPress={() => navigation.navigate('Details')}
 
-function WelcomeScreen({navigation}) {
+function NewMemoryScreen({navigation}) {
     return (
         <AppScreen>
-            <AppLogo/>
-            <View style={styles.container}>
-                <AppButton 
-                title="Register"
-                onPress={() => navigation.navigate('Register')} />
-                <AppButton 
-                title="Login"
-                onPress={() => navigation.navigate('Login')} />
-            </View>
-            <AppClouds/>
         </AppScreen>
     );
 }
@@ -39,4 +29,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default WelcomeScreen;
+export default NewMemoryScreen;

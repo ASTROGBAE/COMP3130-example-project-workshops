@@ -5,16 +5,13 @@ import * as yup from 'yup';
 
 import AppButton from '../components/AppButton'; 
 import AppScreen from '../components/AppScreen';
-
 import AppColors from "../config/AppColors";
-import AppLogo from '../components/AppLogo'; 
-import AppClouds from '../components/AppClouds'; 
 import AppText from '../components/AppText';
 import AppTextInput from '../components/AppTextInput';
 
 // TODO onPress={() => navigation.navigate('Details')}
 
-function LoginScreen({navigation}) {
+function RegisterScreen({navigation}) {
 
     let schema = yup.object().shape( // yup validation stuff
         {
@@ -53,8 +50,26 @@ function LoginScreen({navigation}) {
                             onBlur= {() => setFieldTouched("password")}
                             onChangeText = {handleChange("password")}
                         />
+                        <AppTextInput // password
+                            autoCapitalize="none"
+                            autoCorrect={false}
+                            icon="lock"
+                            secureTextEntry={true}
+                            textContentType="password"
+                            onBlur= {() => setFieldTouched("password")}
+                            onChangeText = {handleChange("password")}
+                        />
+                        <AppTextInput // password
+                            autoCapitalize="none"
+                            autoCorrect={false}
+                            icon="lock"
+                            secureTextEntry={true}
+                            textContentType="password"
+                            onBlur= {() => setFieldTouched("password")}
+                            onChangeText = {handleChange("password")}
+                        />
                         {touched.password && <AppText title={errors.password} style={{color:'red', fontSize:16}}/>}
-                        <AppButton onPress={handleSubmit} title="Login" />
+                        <AppButton onPress={handleSubmit} title="Register" />
                     </View>
                     )}
                 </Formik>
@@ -74,4 +89,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default LoginScreen;
+export default RegisterScreen;
