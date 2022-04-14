@@ -54,7 +54,8 @@ function LoginScreen({navigation}) {
                             onChangeText = {handleChange("password")}
                         />
                         {touched.password && <AppText title={errors.password} style={{color:'red', fontSize:16}}/>}
-                        <AppButton onPress={handleSubmit} title="Login" />
+                        <AppButton onPress={() => navigation.navigate('Start')} 
+                        title="Login" />
                     </View>
                     )}
                 </Formik>

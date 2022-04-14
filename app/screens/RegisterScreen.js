@@ -69,7 +69,8 @@ function RegisterScreen({navigation}) {
                             onChangeText = {handleChange("password")}
                         />
                         {touched.password && <AppText title={errors.password} style={{color:'red', fontSize:16}}/>}
-                        <AppButton onPress={handleSubmit} title="Register" />
+                        <AppButton onPress={() => navigation.navigate('Start')} 
+                        title="Register" />
                     </View>
                     )}
                 </Formik>
