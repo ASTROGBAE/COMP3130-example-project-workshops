@@ -30,9 +30,7 @@ const styles = StyleSheet.create({
         backgroundColor: AppColors.primary,
     }, 
     container:{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center"
+        flex: 0.92,
     }
 })
 
