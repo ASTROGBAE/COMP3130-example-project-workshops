@@ -13,17 +13,11 @@ function AppButton({image, title, subtitle}) {
         return (
             <View style={styles.container}>
                 <TouchableOpacity>
-                    <ImageBackground
-                        style={styles.image}
-                        imageStyle={{ borderRadius: 29}}
-                        source={image}
-                        resizeMode='cover'>
-                        <LinearGradient 
-                            colors={['#00000000', '#000000']} 
-                            style={{height : '100%', width : '100%'}}>
-                        </LinearGradient>
-                    </ImageBackground>
-
+                    <Image source={image} style={styles.image} resizeMode='cover'/>
+                    <LinearGradient 
+                        colors={['#00000000', '#000000']} 
+                        style={{position:'absolute', height : '100%', width:windowWidth*0.9, borderRadius:29}}>
+                    </LinearGradient>
                 </TouchableOpacity>
             </View>
         );
