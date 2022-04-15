@@ -81,4 +81,37 @@ export default class DataManager {
         return this.categories
     }
 
+    // TODO add edge case for when categories empty!
+    // return list of categories with random thumbnail from list
+    getRandomMemoryList() {
+        console.log("---------\n")
+        let buffer = 8;
+        let memoryClone = JSON.parse(JSON.stringify(this.memories));
+        let keyList = [];
+        let randomList = [];
+
+        // create list of keys for accessing later
+        for (var key in memoryClone) { // loop to add random image source from list of 
+            if (memoryClone.hasOwnProperty(key)) {
+                keyList.push(memoryClone[key]);
+            }
+        }
+        console.log("keyList: " + keyList)
+
+        // TODO this isn't working right now, maybe make a seperate js file and just test
+        // working with objects to make it all work correctly
+
+        while (buffer > 0 && keyList.length > 0) {
+            let target = Math.floor(Math.random() * keyList.length)
+            let randomKey = keyList[target]
+            keyList.splice(target,1)
+            console.log("Taken out: " + randomKey + ", remaining length " + keyList.length)
+            if (this.memories.hasOwnProperty(key)) {
+                console.log("Target memory: " + this.memories[randomKey])
+            }
+            buffer --;
+        }
+        return randomList
+    }
+
 }
