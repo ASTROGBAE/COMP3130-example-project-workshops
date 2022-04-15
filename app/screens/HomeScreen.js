@@ -9,31 +9,20 @@ import { FlatList } from 'react-native-gesture-handler';
 
 // TODO onPress={() => navigation.navigate('Details')}
 
-// below is the gemeraton of a random selection of memories, chosen once at random until all are shown.
-let data = DataManager.getInstance();
-let memoriesOrdered = data.memories;
-let memoriesRandom = [];
-
-// get memory at random from those not shown, remove from list
-const randomMemory = () => {
-    let target = Math.floor(Math.random() * memoriesOrdered.length)
-    let m = memoriesOrdered[target];
-    memoriesOrdered.splice(m)
-    return m
-}
-
-const getMemoryList = () => {
-    while (memoriesOrdered.length !== 0) {
-        memoriesRandom.push(randomMemory())
-    }
-}
-
 //getMemoryList(); // TODO refactor this all into anonymous functions, etc...
 
 
 // TODO refactor usage of constants
 
+// TODO deal with edge case where no memories remaining?
+
 function HomeScreen({navigation}) {
+
+    // below is the gemeraton of a random selection of memories, chosen once at random until all are shown.
+    let data = DataManager.getInstance();
+    
+    // TODO get random function working, giving up for now... >:(
+
     return (
         <AppScreen>
             <Carousel 
@@ -42,7 +31,7 @@ function HomeScreen({navigation}) {
                 sliderWidth={Dimensions.get('window').width}
                 sliderHeight={Dimensions.get('window').height}
                 itemWidth={Dimensions.get('window').width}
-                data = {memoriesOrdered}
+                data = {data.memories}
                 renderItem = {({item, index}) =>
                     <AppImage image={item.image} title={item.title} type = 'Big'/>}
             />

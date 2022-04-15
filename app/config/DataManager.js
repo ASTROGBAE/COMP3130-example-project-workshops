@@ -36,11 +36,13 @@ export default class DataManager {
             id: 0,
             title: "Planets",
             memoryIDs: [0, 1],
+            image: 0,
         },
         {
             id: 1,
             title: "Nebulae",
             memoryIDs: [2],
+            image: 0,
         }
     ]
 
@@ -51,14 +53,32 @@ export default class DataManager {
         return this.myInstance;
     }
 
-    // return memory whose ID matches param, if any
+    // get list of categories with random thumbnail from list
+    // TODO make edge case for when 
     getMemory(id) {
-        if (DataMemories.myInstance != null) {
-            for (memory in this.memories) {
-                if (memory.id == id) {
-                    return memory
+        for (var key in this.memories) {
+            if (this.memories.hasOwnProperty(key)) {
+                if (id === this.memories[key]['id']) {
+                    return this.memories[key];
                 }
             }
         }
+
+        return this.categories
     }
+
+    // TODO add edge case for when categories empty!
+    // return list of categories with random thumbnail from list
+    getCategoryList() {
+        this.getMemory()
+        for (var key in this.categories) { // loop to add random image source from list of 
+            if (this.categories.hasOwnProperty(key)) {
+                let categoryMemories = this.categories[key]['memoryIDs'];
+                let randomMemoryID = categoryMemories[Math.floor(Math.random() * categoryMemories.length)]
+                this.categories[key]['image'] = this.getMemory(randomMemoryID)['image'];
+            }
+        }
+        return this.categories
+    }
+
 }

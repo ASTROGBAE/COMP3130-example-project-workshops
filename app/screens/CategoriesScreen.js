@@ -14,14 +14,13 @@ import { FlatList } from 'react-native-gesture-handler';
 
 // TODO onPress={() => navigation.navigate('Details')}
 let data = DataManager.getInstance();
-let memories = data.memories;
 
 function CategoriesScreen({navigation}) {
     return (
         <AppScreen>
             <View style={styles.container}>
                 <FlatList style={{padding:10, flex:1}}
-                data = {memories}
+                data = {data.getCategoryList()}
                 keyExtractor={(item) => item.id}
                 numColumns={2}
                 renderItem = {({item}) =>
