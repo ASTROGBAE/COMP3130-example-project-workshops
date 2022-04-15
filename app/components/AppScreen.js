@@ -6,9 +6,9 @@ import AppColors from "../config/AppColors";
 
 // TODO figure out how to deal with iOS for statusBar?
 
-function AppScreen({children, style}) {
+function AppScreen({children}) {
     return (
-        <View style = {[styles.screen,style]}> 
+        <View style = {styles.screen}> 
             {Platform.OS === 'android' ?
             <StatusBar backgroundColor={AppColors.primary}/>:null}
             <LinearGradient

@@ -9,17 +9,36 @@ import AppText from "./AppText";
 const imageWidth = Dimensions.get('window').width*0.9;
 const imageHeight = Dimensions.get('window').height*0.9;
 
-function AppImage({image, title, subtitle}) {
+// TODO refactor heigh code below
+
+function AppImage({image, title, subtitle, type}) {
+    // figure out width and height based on type
+    // default 
+    let imageWidth = Dimensions.get('window').width;
+    let imageHeight = Dimensions.get('window').height;
+    if (type === 'Big') {
+        imageWidth *= 0.9;
+        imageHeight *= 0.9;
+    } else if (type === 'Small') {
+        imageWidth *= 0.4;
+        imageHeight *= 0.2;
+    }
+    // render items
     if (title || subtitle) {
         return (
             <View style={styles.container}>
                 <TouchableOpacity>
-                    <Image source={image} style={styles.image} resizeMode='cover'/>
+                    <Image source={image} style={{
+                        flex:1, 
+                        height : imageHeight, 
+                        width: imageWidth, 
+                        borderRadius:29,
+                    }} resizeMode='cover'/>
                     <LinearGradient 
                         colors={['#00000000', '#000000']} 
                         style={{
                             position:'absolute', 
-                            height : imageHeight, 
+                            height : imageHeight*1.022, 
                             width: imageWidth, 
                             borderRadius:29}}>
                     </LinearGradient>
@@ -41,12 +60,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems:'center',
         flex:1,
-    },
-    image: {
-        flex:1, 
-        height : imageHeight, 
-        width: imageWidth, 
-        borderRadius:29,
     },
 });
 

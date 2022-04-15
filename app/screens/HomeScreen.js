@@ -1,5 +1,6 @@
 import React from 'react';
-import { StyleSheet, View, Alert} from 'react-native';
+import { Dimensions, StyleSheet, View, Alert} from 'react-native';
+import Carousel from 'react-native-snap-carousel';
 
 import AppScreen from '../components/AppScreen';
 import AppImage from '../components/AppImage';
@@ -27,21 +28,36 @@ const getMemoryList = () => {
     }
 }
 
-getMemoryList(); // TODO refactor this all into anonymous functions, etc...
+//getMemoryList(); // TODO refactor this all into anonymous functions, etc...
 
+
+// TODO refactor usage of constants
 
 function HomeScreen({navigation}) {
     return (
         <AppScreen>
-            <FlatList
+            <Carousel 
+                layout={'default'}
+                windowSize = {Dimensions.get('window').width*0.9}
+                sliderWidth={Dimensions.get('window').width}
+                sliderHeight={Dimensions.get('window').height}
+                itemWidth={Dimensions.get('window').width}
+                data = {memoriesOrdered}
+                renderItem = {({item, index}) =>
+                    <AppImage image={item.image} title={item.title} type = 'Big'/>}
+            />
+        </AppScreen>
+    );
+}
+
+/* FlatList implementation of above
+        <FlatList
                 data = {memoriesRandom}
                 keyExtractor={(item) => item.id}
                 renderItem = {({item}) =>
                     <AppImage image={item.image} title={item.title}/>
                 }/>
-        </AppScreen>
-    );
-}
+*/
 
 const styles = StyleSheet.create({
 })
