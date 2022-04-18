@@ -33,7 +33,11 @@ function HomeScreen({navigation}) {
                 itemWidth={Dimensions.get('window').width}
                 data = {data.getRandomMemoryList()}
                 renderItem = {({item, index}) =>
-                    <AppImage image={item.image} title={item.title} type = 'Big'/>}
+                    <AppImage 
+                    image={item.image} 
+                    title={item.title} 
+                    date={item.date}
+                    type = 'Big'/>}
             />
         </AppScreen>
     );

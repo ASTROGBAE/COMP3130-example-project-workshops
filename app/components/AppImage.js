@@ -9,9 +9,9 @@ import AppText from "./AppText";
 const imageWidth = Dimensions.get('window').width*0.9;
 const imageHeight = Dimensions.get('window').height*0.9;
 
-// TODO refactor heigh code below
+// TODO refactor code below, very messy
 
-function AppImage({image, title, subtitle, type}) {
+function AppImage({image, title, subtitle, date, type}) {
     // figure out width and height based on type
     // default 
     let imageWidth = Dimensions.get('window').width;
@@ -23,8 +23,22 @@ function AppImage({image, title, subtitle, type}) {
         imageWidth *= 0.4;
         imageHeight *= 0.2;
     }
+    let text = null;
+    if (title && date) { // title and date option
+        console.log(title+date)
+        text = (
+            <View style={{flex:1, 
+                height : imageHeight, 
+                width: imageWidth,
+                justifyContent: 'center', alignItems: 'center',
+                position: 'absolute'}}>
+                <AppText style={{fontSize:20}}>{title}</AppText>
+                <AppText>{date}</AppText>
+            </View>
+        );
+    }
     // render items
-    if (title || subtitle) {
+    if (title || subtitle || date) {
         return (
             <View style={styles.container}>
                 <TouchableOpacity>
@@ -42,6 +56,7 @@ function AppImage({image, title, subtitle, type}) {
                             width: imageWidth, 
                             borderRadius:29}}>
                     </LinearGradient>
+                    {text}
                 </TouchableOpacity>
             </View>
         );
