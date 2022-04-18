@@ -6,12 +6,16 @@ import * as yup from 'yup';
 import AppButton from '../components/AppButton'; 
 import AppScreen from '../components/AppScreen';
 import AppColors from "../config/AppColors";
+import DataManager from '../config/DataManager';
 import AppText from '../components/AppText';
 import AppTextInput from '../components/AppTextInput';
 
 // TODO onPress={() => navigation.navigate('Details')}
 
+const data = DataManager.getInstance();
+
 function RegisterScreen({navigation}) {
+    data.createUser("Jacob"); // TODO test, add better one
 
     let schema = yup.object().shape( // yup validation stuff
         {

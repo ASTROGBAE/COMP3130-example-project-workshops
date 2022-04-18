@@ -31,7 +31,7 @@ function HomeScreen({navigation}) {
                 sliderWidth={Dimensions.get('window').width}
                 sliderHeight={Dimensions.get('window').height}
                 itemWidth={Dimensions.get('window').width}
-                data = {data.memories}
+                data = {data.getRandomMemoryList()}
                 renderItem = {({item, index}) =>
                     <AppImage image={item.image} title={item.title} type = 'Big'/>}
             />

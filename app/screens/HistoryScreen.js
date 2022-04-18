@@ -18,14 +18,12 @@ let data = DataManager.getInstance();
 
 
 function HistoryScreen({navigation}) {
-
-    data.getRandomMemoryList();
     return (
         <AppScreen>
             <AppScreen>
             <View style={styles.container}>
                 <FlatList style={{padding:10, flex:1}}
-                data = {data.memories}
+                data = {data.getMemoryByDate()}
                 keyExtractor={(item) => item.id}
                 numColumns={2}
                 renderItem = {({item}) =>

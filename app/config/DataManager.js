@@ -3,9 +3,14 @@
 
 export default class DataManager {
     static myInstance = null;
-    userID = "";
-    userJoinedDate="";
-    userImagePath="";
+
+    // constructor containing class fields
+    constructor() {
+        this.userName = "";
+        this.userPassWord = "";
+        this.userJoinedDate="";
+        this.userImagePath="";
+      }
 
     memories = [
         {
@@ -27,7 +32,7 @@ export default class DataManager {
             image: require('../assets/orion-stars.jpg'),
             title: "Orion Nebula Stars",
             desc: "The stars of Orion Nebula are young and bright. This is a stellar nursery! A star much like our own could be there. Maybe there is life, too?",
-            date: new Date("202-01-03"),
+            date: new Date("2021-01-03"),
         }
     ]
 
@@ -46,6 +51,7 @@ export default class DataManager {
         }
     ]
 
+    // get singleton instance of object for all classes
     static getInstance() {
         if (DataManager.myInstance == null) {
             DataManager.myInstance = new DataManager();
@@ -81,37 +87,59 @@ export default class DataManager {
         return this.categories
     }
 
-    // TODO add edge case for when categories empty!
-    // return list of categories with random thumbnail from list
+    // return list of memories in random order, up to a maximum number defined within as
+    // the buffer_limit
     getRandomMemoryList() {
-        console.log("---------\n")
-        let buffer = 8;
-        let memoryClone = JSON.parse(JSON.stringify(this.memories));
-        let keyList = [];
-        let randomList = [];
+        let buffer_limit = 8; // maximum number of memories to return from memories 
+                                // in random order
+        let randomList = []; // list of randoms to return
 
-        // create list of keys for accessing later
-        for (var key in memoryClone) { // loop to add random image source from list of 
-            if (memoryClone.hasOwnProperty(key)) {
-                keyList.push(memoryClone[key]);
+        if (this.memories.length != 0) {
+            // loop to add new memories to list
+            let buffer = 0; // buffer idx
+            while (buffer <= buffer_limit && buffer < this.memories.length) {
+                // loop until buffer reached or added all memories
+                let idx = Math.floor(Math.random() * this.memories.length) 
+                                    // random idx to pull from
+                let memory = this.memories[idx]; // random memory
+                let alreadyRandomised = false;
+                // loop to check if randomised object already added...
+                if (randomList.length != 0) { 
+                    // if first iteration, skip checking if it already contains something...
+                    randomList.forEach(function (arrayItem) {
+                        if (arrayItem.id === memory.id) { // TODO check if equality is correct?
+                            alreadyRandomised = true;
+                        }
+                    });
+                }
+                // if not in list already, add to random list and increase buffer...
+                if (!alreadyRandomised) {
+                    randomList.push(memory);
+                    buffer ++;
+                }
             }
-        }
-        console.log("keyList: " + keyList)
-
-        // TODO this isn't working right now, maybe make a seperate js file and just test
-        // working with objects to make it all work correctly
-
-        while (buffer > 0 && keyList.length > 0) {
-            let target = Math.floor(Math.random() * keyList.length)
-            let randomKey = keyList[target]
-            keyList.splice(target,1)
-            console.log("Taken out: " + randomKey + ", remaining length " + keyList.length)
-            if (this.memories.hasOwnProperty(key)) {
-                console.log("Target memory: " + this.memories[randomKey])
-            }
-            buffer --;
         }
         return randomList
+    }
+
+    // return an ordered list of memories by date (later to earlier)
+    getMemoryByDate() {
+        let history = JSON.parse(JSON.stringify(this.memories)); // deep copy memories to order
+        history.sort(function(a, b){ // sorting algorithm
+            if (b.date > a.date) {
+                return 1;
+            } else {
+                return -1;
+            }
+        });
+        return history; // return ordered list
+    }
+
+    // TODO make this more complicated!
+    createUser(_userName) {
+        this.userName = _userName;
+        this.userJoinedDate=new Date(); // get current date
+        this.userImagePath=require('../assets/red-spot.jpeg'); // TODO add custom image
     }
 
 }

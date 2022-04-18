@@ -7,6 +7,7 @@ import AppButton from '../components/AppButton';
 import AppScreen from '../components/AppScreen';
 
 import AppColors from "../config/AppColors";
+import DataManager from '../config/DataManager';
 import AppLogo from '../components/AppLogo'; 
 import AppClouds from '../components/AppClouds'; 
 import AppText from '../components/AppText';
@@ -14,7 +15,10 @@ import AppTextInput from '../components/AppTextInput';
 
 // TODO onPress={() => navigation.navigate('Details')}
 
+const data = DataManager.getInstance();
+
 function LoginScreen({navigation}) {
+    data.createUser("Jacob"); // TODO test, add better one
 
     let schema = yup.object().shape( // yup validation stuff
         {
