@@ -30,10 +30,25 @@ function AppImage({image, title, subtitle, date, type}) {
             <View style={{flex:1, 
                 height : imageHeight, 
                 width: imageWidth,
-                justifyContent: 'center', alignItems: 'center',
+                justifyContent: 'flex-end', alignItems: 'center',
                 position: 'absolute'}}>
-                <AppText style={{fontSize:20}}>{title}</AppText>
-                <AppText>{date}</AppText>
+                <AppText title={title} style = {{fontSize: 28}}/>
+                <AppText title={
+                    date.getDate()+"/"+date.getMonth()+1+"/"+date.getFullYear()}
+                    style = {{fontSize: 20}}
+                    />
+                <View style={{height : imageHeight*0.2}}></View>
+            </View>
+        );
+    } if (title && !date) { // only title
+        text = (
+            <View style={{flex:1, 
+                height : imageHeight, 
+                width: imageWidth,
+                justifyContent: 'flex-end', alignItems: 'center',
+                position: 'absolute'}}>
+                <AppText title={title} style = {{fontSize: 22}}/>
+                <View style={{height : imageHeight*0.1}}></View>
             </View>
         );
     }
