@@ -6,7 +6,12 @@ import AppColors from "../config/AppColors";
 
 // TODO figure out how to deal with iOS for statusBar?
 
-function AppScreen({children}) {
+let containerFlex = 0.92
+
+function AppScreen({children, statusBar}) {
+    if (!statusBar) {
+        containerFlex=1
+    }
     return (
         <View style = {styles.screen}> 
             {Platform.OS === 'android' ?
@@ -30,7 +35,7 @@ const styles = StyleSheet.create({
         backgroundColor: AppColors.primary,
     }, 
     container:{
-        flex: 0.92,
+        flex: containerFlex,
     }
 })
 

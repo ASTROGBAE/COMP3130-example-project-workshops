@@ -14,7 +14,7 @@ import AppClouds from '../components/AppClouds';
 
 function WelcomeScreen({navigation}) {
     return (
-        <AppScreen>
+        <AppScreen statusBar={false}>
             <AppLogo/>
             <View style={styles.container}>
                 <AppButton 

@@ -69,8 +69,7 @@ export default class DataManager {
                 }
             }
         }
-
-        return this.categories
+        return null;
     }
 
     // TODO add edge case for when categories empty!

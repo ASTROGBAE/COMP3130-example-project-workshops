@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Alert} from 'react-native';
+import { Dimensions, Image, StyleSheet, View, Alert} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/native';
 
@@ -9,12 +9,24 @@ import AppScreen from '../components/AppScreen';
 import AppColors from "../config/AppColors";
 import AppLogo from '../components/AppLogo'; 
 import AppClouds from '../components/AppClouds'; 
+import DataManager from '../config/DataManager';
 
-// TODO onPress={() => navigation.navigate('Details')}
+const imageWidth = Dimensions.get('window').width;
+const imageHeight = Dimensions.get('window').height;
 
-function MemoryScreen({navigation}) {
+function MemoryScreen({route, navigation}) {
+    const {id} = route.params
+    let data = DataManager.getInstance();
+    let memory = data.getMemory(id)
+    console.log(memory)
     return (
-        <AppScreen>
+        <AppScreen statusBar={false}>
+            <Image source={memory.image} style={{
+                        flex:1, 
+                        height : imageHeight, 
+                        width: imageWidth, 
+                        backgroundColor:'red',
+                    }} resizeMode='cover'/>
         </AppScreen>
     );
 }

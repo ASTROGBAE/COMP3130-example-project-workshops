@@ -14,7 +14,7 @@ import AppClouds from '../components/AppClouds';
 
 function NewMemoryScreen({navigation}) {
     return (
-        <AppScreen>
+        <AppScreen statusBar={false}>
         </AppScreen>
     );
 }

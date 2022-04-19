@@ -20,7 +20,7 @@ let data = DataManager.getInstance();
 function AccountScreen({navigation}) {
     let imageSize = 150;
     return (
-        <AppScreen>
+        <AppScreen statusBar={true}>
             <AppTitle 
             title={'Account'} 
             onPress={() => navigation.navigate('Options')} />

@@ -14,7 +14,7 @@ import AppClouds from '../components/AppClouds';
 
 function OptionsScreen({navigation}) {
     return (
-        <AppScreen>
+        <AppScreen statusBar={false}>
         </AppScreen>
     );
 }

@@ -11,7 +11,7 @@ const imageHeight = Dimensions.get('window').height*0.9;
 
 // TODO refactor code below, very messy
 
-function AppImage({image, title, subtitle, date, type}) {
+function AppImage({image, title, subtitle, date, type, onPress}) {
     // figure out width and height based on type
     // default 
     let imageWidth = Dimensions.get('window').width;
@@ -70,7 +70,7 @@ function AppImage({image, title, subtitle, date, type}) {
     if (title || subtitle || date) {
         return (
             <View style={styles.container}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={onPress}>
                     <Image source={image} style={{
                         flex:1, 
                         height : imageHeight, 

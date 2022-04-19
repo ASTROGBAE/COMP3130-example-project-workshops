@@ -25,7 +25,7 @@ function HomeScreen({navigation}) {
     // TODO get random function working, giving up for now... >:(
 
     return (
-        <AppScreen>
+        <AppScreen statusBar={true}>
             <AppTitle 
             title={'Home'} 
             onPress={() => navigation.navigate('Options')} />
@@ -41,7 +41,8 @@ function HomeScreen({navigation}) {
                     image={item.image} 
                     title={item.title} 
                     date={data.getDateString(item.id)}
-                    type = 'Big'/>}
+                    type = 'Big'
+                    onPress={() => navigation.navigate('Memory', {id: item.id})}/>}
             />
         </AppScreen>
     );

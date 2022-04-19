@@ -28,7 +28,7 @@ function LoginScreen({navigation}) {
     );
 
     return (
-        <AppScreen>
+        <AppScreen statusBar={false}>
             <View style={{flex:0.1}}></View>
             <View style={styles.container}>
             <Formik

@@ -18,7 +18,7 @@ let data = DataManager.getInstance();
 
 function CategoriesScreen({navigation}) {
     return (
-        <AppScreen>
+        <AppScreen statusBar={true}>
             <AppTitle 
             title={'Categories'} 
             onPress={() => navigation.navigate('Options')} />
@@ -29,7 +29,8 @@ function CategoriesScreen({navigation}) {
                 numColumns={2}
                 renderItem = {({item}) =>
                     <View style={{padding:10}}>
-                        <AppImage image={item.image} title={item.title} type={'Small'}/>
+                        <AppImage image={item.image} title={item.title} type={'Small'}
+                        onPress={() => navigation.navigate('Memory')}/>
                     </View>
                 }/>
             </View>

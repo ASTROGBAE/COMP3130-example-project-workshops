@@ -20,7 +20,7 @@ let data = DataManager.getInstance();
 
 function HistoryScreen({navigation}) {
     return (
-        <AppScreen>
+        <AppScreen statusBar={true}>
             <AppTitle 
             title={'History'} 
             onPress={() => navigation.navigate('Options')} />
@@ -33,7 +33,8 @@ function HistoryScreen({navigation}) {
                     <View style={{padding:10}}>
                         <AppImage 
                         image={item.image} 
-                        date={data.getDateString(item.id)} type={'Small'}/>
+                        date={data.getDateString(item.id)} type={'Small'}
+                        onPress={() => navigation.navigate('Memory')}/>
                     </View>
                 }/>
             </View>
