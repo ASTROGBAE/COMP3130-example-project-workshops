@@ -34,7 +34,7 @@ function HistoryScreen({navigation}) {
                         <AppImage 
                         image={item.image} 
                         date={data.getDateString(item.id)} type={'Small'}
-                        onPress={() => navigation.navigate('Memory')}/>
+                        onPress={() => navigation.navigate('Memory', {id: item.id})}/>
                     </View>
                 }/>
             </View>

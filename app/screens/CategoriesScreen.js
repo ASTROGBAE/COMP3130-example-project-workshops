@@ -30,7 +30,7 @@ function CategoriesScreen({navigation}) {
                 renderItem = {({item}) =>
                     <View style={{padding:10}}>
                         <AppImage image={item.image} title={item.title} type={'Small'}
-                        onPress={() => navigation.navigate('Memory')}/>
+                        onPress={() => navigation.navigate('Memory', {id: item.id})}/>
                     </View>
                 }/>
             </View>
