@@ -1,7 +1,9 @@
 import React from 'react';
-import { StyleSheet, View, Alert } from 'react-native';
+import { StyleSheet, View, TouchableOpacity, Image } from 'react-native';
 import {Formik} from 'formik'; // formik used here!
 import * as yup from 'yup';
+import * as ImagePicker from 'expo-image-picker';
+import {MaterialCommunityIcons} from '@expo/vector-icons'
 
 import AppButton from '../components/AppButton'; 
 import AppScreen from '../components/AppScreen';
@@ -15,7 +17,36 @@ import AppTextInput from '../components/AppTextInput';
 const data = DataManager.getInstance();
 
 function RegisterScreen({navigation}) {
+    const [selectedImage, setSelectedImage] = React.useState(null);
 
+    let openImagePickerAsync = async () => {
+        let permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+
+        if (permissionResult.granted === false) {
+        alert('Permission to access camera roll is required!');
+        return;
+        }
+
+        let pickerResult = await ImagePicker.launchImageLibraryAsync();
+
+        if (pickerResult.cancelled === true) {
+        return;
+        }
+
+        setSelectedImage({ localUri: pickerResult.uri });
+    };
+
+    if (selectedImage !== null) {
+        return (
+        <View style={styles.container}>
+            <Image
+            source={{ uri: selectedImage.localUri }}
+            style={styles.thumbnail}
+            />
+        </View>
+        );
+    }
+      
     let schema = yup.object().shape( // yup validation stuff
         {
             name: yup.string().required().min(1).max(14).label("Name"),
@@ -28,6 +59,11 @@ function RegisterScreen({navigation}) {
         <AppScreen statusBar={false}>
             <View style={{flex:0.1}}></View>
             <View style={styles.container}>
+            <TouchableOpacity onPress={openImagePickerAsync}>
+                <MaterialCommunityIcons 
+                    name={'star-four-points'} 
+                    size={40} color={AppColors.primary}/>
+            </TouchableOpacity>
             <Formik
                     initialValues={{ name: '', email: '', password:'', }}
                     onSubmit={values => {
@@ -83,7 +119,11 @@ const styles = StyleSheet.create({
         width:'100%',
         backgroundColor: AppColors.white,
         alignItems: "center"
-    }
+    }, thumbnail: {
+        width: 300,
+        height: 300,
+        resizeMode: "contain"
+      }
 })
 
 export default RegisterScreen;
