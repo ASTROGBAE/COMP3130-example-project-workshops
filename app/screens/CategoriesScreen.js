@@ -6,6 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 import AppButton from '../components/AppButton'; 
 import AppScreen from '../components/AppScreen';
 import DataManager from '../config/DataManager';
+import AppTitle from '../components/AppTitle';
 import AppColors from "../config/AppColors";
 import AppImage from '../components/AppImage';
 import AppLogo from '../components/AppLogo'; 
@@ -18,6 +19,9 @@ let data = DataManager.getInstance();
 function CategoriesScreen({navigation}) {
     return (
         <AppScreen>
+            <AppTitle 
+            title={'Categories'} 
+            onPress={() => navigation.navigate('Options')} />
             <View style={styles.container}>
                 <FlatList style={{padding:10, flex:1}}
                 data = {data.getCategoryList()}

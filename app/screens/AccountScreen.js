@@ -8,6 +8,7 @@ import AppScreen from '../components/AppScreen';
 
 import AppColors from "../config/AppColors";
 import DataManager from '../config/DataManager';
+import AppTitle from '../components/AppTitle';
 import AppLogo from '../components/AppLogo'; 
 import AppClouds from '../components/AppClouds'; 
 
@@ -16,12 +17,16 @@ import AppClouds from '../components/AppClouds';
 let data = DataManager.getInstance();
 
 function AccountScreen({navigation}) {
+    let imageSize = 150;
     return (
         <AppScreen>
+            <AppTitle 
+            title={'Account'} 
+            onPress={() => navigation.navigate('Options')} />
             <View style={styles.container}>
                 <Image
                     source={data.userImagePath}
-                    style={{width: 400, height: 400, borderRadius: 400/ 2}} 
+                    style={{width: imageSize, height: imageSize, borderRadius: imageSize/2}} 
                 />
                 <AppButton 
                     title="Login"

@@ -9,6 +9,7 @@ import AppScreen from '../components/AppScreen';
 import AppColors from "../config/AppColors";
 import AppImage from '../components/AppImage';
 import AppLogo from '../components/AppLogo'; 
+import AppTitle from '../components/AppTitle';
 import AppClouds from '../components/AppClouds'; 
 import DataManager from '../config/DataManager';
 
@@ -18,10 +19,11 @@ let data = DataManager.getInstance();
 
 
 function HistoryScreen({navigation}) {
-    console.log(data.getMemoryByDate())
     return (
         <AppScreen>
-            <AppScreen>
+            <AppTitle 
+            title={'History'} 
+            onPress={() => navigation.navigate('Options')} />
             <View style={styles.container}>
                 <FlatList style={{padding:10, flex:1}}
                 data = {data.getMemoryByDate()}
@@ -35,7 +37,6 @@ function HistoryScreen({navigation}) {
                     </View>
                 }/>
             </View>
-        </AppScreen>
         </AppScreen>
     );
 }
