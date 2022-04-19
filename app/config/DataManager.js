@@ -7,6 +7,7 @@ export default class DataManager {
     // constructor containing class fields
     constructor() {
         this.userName = "";
+        this.userEmail
         this.userPassWord = "";
         this.userJoinedDate="";
         this.userImagePath="";
@@ -140,9 +141,16 @@ export default class DataManager {
         return memory.date.getDate()+"/"+memory.date.getMonth()+1+"/"+memory.date.getFullYear()
     }
 
+    // get date that user joined
+    getJoinedDate() {
+        let date = this.userJoinedDate
+        return date.getDate()+"/"+date.getMonth()+1+"/"+date.getFullYear()
+    }
+
     // TODO make this more complicated!
-    createUser(_userName) {
+    createUser(_userName, _userEmail) {
         this.userName = _userName;
+        this.userEmail = _userEmail;
         this.userJoinedDate=new Date(); // get current date
         this.userImagePath=require('../assets/red-spot.jpeg'); // TODO add custom image
     }

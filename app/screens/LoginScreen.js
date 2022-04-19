@@ -18,7 +18,7 @@ import AppTextInput from '../components/AppTextInput';
 const data = DataManager.getInstance();
 
 function LoginScreen({navigation}) {
-    data.createUser("Jacob"); // TODO test, add better one
+    data.createUser("Jacob", "jacob@email.com"); // TODO test, add better one
 
     let schema = yup.object().shape( // yup validation stuff
         {

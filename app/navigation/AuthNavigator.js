@@ -20,7 +20,7 @@ function AuthNavigator() { // in options, add option to remove header, set to fa
             <AppStack.Screen name="Login" component={LoginScreen} options={{headerShown:false}}/>
             <AppStack.Screen name="Start" component={TabNavigator} options={{headerShown:false}}/>
             <AppStack.Screen name="Options" component={OptionsScreen} options={{headerShown:false}}/>
-            <AppStack.Screen name="MemoryScreen" component={MemoryScreen} options={{headerShown:false}}/>
+            <AppStack.Screen name="Memory" component={MemoryScreen} options={{headerShown:false}}/>
         </AppStack.Navigator>
     );
 }

@@ -11,6 +11,7 @@ import DataManager from '../config/DataManager';
 import AppTitle from '../components/AppTitle';
 import AppLogo from '../components/AppLogo'; 
 import AppClouds from '../components/AppClouds'; 
+import AppText from '../components/AppText';
 
 // TODO onPress={() => navigation.navigate('Details')}
 
@@ -28,9 +29,24 @@ function AccountScreen({navigation}) {
                     source={data.userImagePath}
                     style={{width: imageSize, height: imageSize, borderRadius: imageSize/2}} 
                 />
+                <AppText />
+                <AppText title={data.userName} style={styles.subtitle}/>
+                <View style={{flexDirection:'row'}}>
+                    <AppText title={'Email: '} style={styles.title}/>
+                    <AppText title={data.userEmail} style={styles.subtitle}/>
+                </View>
+                <AppText />
+                <View style={{flexDirection:'row'}}>
+                    <AppText title={'User since: '} style={styles.title}/>
+                    <AppText title={data.getJoinedDate()} style={styles.subtitle}/>
+                </View>
+                <View style={{flexDirection:'row'}}>
+                    <AppText title={'Memories added: '} style={styles.title}/>
+                    <AppText title={data.memories.length} style={styles.subtitle}/>
+                </View>
                 <AppButton 
-                    title="Login"
-                    onPress={() => navigation.navigate('Login')} />
+                    title="Log out"
+                    onPress={() => navigation.navigate('Welcome')} />
             </View>
         </AppScreen>
     );
@@ -43,6 +59,12 @@ const styles = StyleSheet.create({
         backgroundColor: AppColors.white,
         justifyContent: "center",
         alignItems: "center"
+    },
+    title: {
+        fontWeight:'bold',
+        color:AppColors.primary
+    }, subtitle: {
+        color:AppColors.offBlack
     }
 })
 
