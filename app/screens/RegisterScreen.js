@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, ImageBackground, Platform, Alert } from 'react-native';
+import { StyleSheet, View, Alert } from 'react-native';
 import {Formik} from 'formik'; // formik used here!
 import * as yup from 'yup';
 
@@ -15,12 +15,12 @@ import AppTextInput from '../components/AppTextInput';
 const data = DataManager.getInstance();
 
 function RegisterScreen({navigation}) {
-    data.createUser("Jacob", "jacob@email.com"); // TODO test, add better one
 
     let schema = yup.object().shape( // yup validation stuff
         {
+            name: yup.string().required().min(1).max(14).label("Name"),
             email: yup.string().required().email().label("Email"),
-            password: yup.string().required().min(4).max(8).label("Email"),
+            password: yup.string().required().min(4).max(14).label("Password"),
         }
     );
 
@@ -29,12 +29,24 @@ function RegisterScreen({navigation}) {
             <View style={{flex:0.1}}></View>
             <View style={styles.container}>
             <Formik
-                    initialValues={{ email: '', password:'', }}
-                    onSubmit={values => console.log(values)}
+                    initialValues={{ name: '', email: '', password:'', }}
+                    onSubmit={values => {
+                        data.createUser(values.name, values.email);
+                        console.log("User created: " + values.name + ", " + values.email);
+                        navigation.navigate('Start')
+                    }}
                     validationSchema={schema}
                 >
                     {({ handleChange, handleSubmit, errors, setFieldTouched, touched }) => (
                     <View>
+                        <AppTextInput // name
+                            autoCapitalize="none"
+                            autoCorrect={false}
+                            icon="account"
+                            onBlur= {() => setFieldTouched("name")}
+                            onChangeText = {handleChange("name")}
+                        />
+                        {touched.name && <AppText title={errors.name} style={{color:'red', fontSize:14}}/>}
                         <AppTextInput // email
                             autoCapitalize="none"
                             autoCorrect={false}
@@ -44,7 +56,7 @@ function RegisterScreen({navigation}) {
                             onBlur= {() => setFieldTouched("email")}
                             onChangeText = {handleChange("email")}
                         />
-                        {touched.email && <AppText title={errors.email} style={{color:'red', fontSize:16}}/>}
+                        {touched.email && <AppText title={errors.email} style={{color:'red', fontSize:14}}/>}
                         <AppTextInput // password
                             autoCapitalize="none"
                             autoCorrect={false}
@@ -54,32 +66,13 @@ function RegisterScreen({navigation}) {
                             onBlur= {() => setFieldTouched("password")}
                             onChangeText = {handleChange("password")}
                         />
-                        <AppTextInput // password
-                            autoCapitalize="none"
-                            autoCorrect={false}
-                            icon="lock"
-                            secureTextEntry={true}
-                            textContentType="password"
-                            onBlur= {() => setFieldTouched("password")}
-                            onChangeText = {handleChange("password")}
-                        />
-                        <AppTextInput // password
-                            autoCapitalize="none"
-                            autoCorrect={false}
-                            icon="lock"
-                            secureTextEntry={true}
-                            textContentType="password"
-                            onBlur= {() => setFieldTouched("password")}
-                            onChangeText = {handleChange("password")}
-                        />
-                        {touched.password && <AppText title={errors.password} style={{color:'red', fontSize:16}}/>}
-                        <AppButton onPress={() => navigation.navigate('Start')} 
-                        title="Register" />
+                        {touched.password && <AppText title={errors.password} style={{color:'red', fontSize:14}}/>}
+                        <AppButton onPress={handleSubmit} title="Register" />
                     </View>
                     )}
                 </Formik>
             </View>
-            <View style={{flex:0.4}}></View>
+            <View style={{flex:0.2}}></View>
         </AppScreen>
     );
 }
@@ -89,7 +82,6 @@ const styles = StyleSheet.create({
         flex:1,
         width:'100%',
         backgroundColor: AppColors.white,
-        justifyContent: "center",
         alignItems: "center"
     }
 })
