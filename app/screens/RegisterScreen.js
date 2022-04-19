@@ -86,7 +86,7 @@ function RegisterScreen({navigation}) {
 
 const styles = StyleSheet.create({
     container: {
-        flex:0.5,
+        flex:1,
         width:'100%',
         backgroundColor: AppColors.white,
         justifyContent: "center",

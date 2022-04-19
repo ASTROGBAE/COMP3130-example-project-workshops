@@ -59,8 +59,7 @@ export default class DataManager {
         return this.myInstance;
     }
 
-    // get list of categories with random thumbnail from list
-    // TODO make edge case for when 
+    // rreturn memory if id matches
     getMemory(id) {
         for (var key in this.memories) {
             if (this.memories.hasOwnProperty(key)) {
@@ -133,6 +132,12 @@ export default class DataManager {
             }
         });
         return history; // return ordered list
+    }
+
+    // return date object as a string of dd/mm/yy format.
+    getDateString(id) {
+        let memory = this.getMemory(id)
+        return memory.date.getDate()+"/"+memory.date.getMonth()+1+"/"+memory.date.getFullYear()
     }
 
     // TODO make this more complicated!

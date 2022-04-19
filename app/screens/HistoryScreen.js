@@ -18,6 +18,7 @@ let data = DataManager.getInstance();
 
 
 function HistoryScreen({navigation}) {
+    console.log(data.getMemoryByDate())
     return (
         <AppScreen>
             <AppScreen>
@@ -28,7 +29,9 @@ function HistoryScreen({navigation}) {
                 numColumns={2}
                 renderItem = {({item}) =>
                     <View style={{padding:10}}>
-                        <AppImage image={item.image} title={item.title} type={'Small'}/>
+                        <AppImage 
+                        image={item.image} 
+                        date={data.getDateString(item.id)} type={'Small'}/>
                     </View>
                 }/>
             </View>

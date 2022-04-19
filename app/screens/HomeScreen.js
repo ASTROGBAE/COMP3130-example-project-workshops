@@ -3,6 +3,7 @@ import { Dimensions, StyleSheet, View, Alert} from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 
 import AppScreen from '../components/AppScreen';
+import AppTitle from '../components/AppTitle';
 import AppImage from '../components/AppImage';
 import DataManager from '../config/DataManager';
 import { FlatList } from 'react-native-gesture-handler';
@@ -25,32 +26,26 @@ function HomeScreen({navigation}) {
 
     return (
         <AppScreen>
+            <AppTitle 
+            title={'Home'} 
+            onPress={() => navigation.navigate('Options')} />
             <Carousel 
                 layout={'default'}
                 windowSize = {Dimensions.get('window').width*0.9}
                 sliderWidth={Dimensions.get('window').width}
                 sliderHeight={Dimensions.get('window').height}
-                itemWidth={Dimensions.get('window').width}
+                itemWidth={Dimensions.get('window').width*0.88}
                 data = {data.getRandomMemoryList()}
                 renderItem = {({item, index}) =>
                     <AppImage 
                     image={item.image} 
                     title={item.title} 
-                    date={item.date}
+                    date={data.getDateString(item.id)}
                     type = 'Big'/>}
             />
         </AppScreen>
     );
 }
-
-/* FlatList implementation of above
-        <FlatList
-                data = {memoriesRandom}
-                keyExtractor={(item) => item.id}
-                renderItem = {({item}) =>
-                    <AppImage image={item.image} title={item.title}/>
-                }/>
-*/
 
 const styles = StyleSheet.create({
 })
