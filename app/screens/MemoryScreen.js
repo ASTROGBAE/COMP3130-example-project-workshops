@@ -1,7 +1,8 @@
-import React from 'react';
-import { Dimensions, Image, StyleSheet, View, Alert} from 'react-native';
+import React, {useState} from 'react';
+import { Dimensions, Image, StyleSheet, TouchableOpacity} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/native';
+import ImageView from "react-native-image-viewing";
 
 import AppButton from '../components/AppButton'; 
 import AppScreen from '../components/AppScreen';
@@ -18,15 +19,19 @@ function MemoryScreen({route, navigation}) {
     const {id} = route.params
     let data = DataManager.getInstance();
     let memory = data.getMemory(id)
-    console.log(memory)
+    const [visible, setIsVisible] = useState(false);
     return (
         <AppScreen statusBar={false}>
-            <Image source={memory.image} style={{
-                        flex:1, 
-                        height : imageHeight, 
-                        width: imageWidth, 
-                        backgroundColor:'red',
-                    }} resizeMode='cover'/>
+            <TouchableOpacity style={styles.container} onPress={() => setIsVisible(true)}>
+                <Image source={memory.image} style={styles.container} resizeMode='cover'/>
+            </TouchableOpacity>
+            <ImageView
+            images={[memory.image]}
+            imageIndex={0}
+            visible={visible}
+            onRequestClose={() => setIsVisible(false)}
+            style={{flex:1}}
+            />
         </AppScreen>
     );
 }
