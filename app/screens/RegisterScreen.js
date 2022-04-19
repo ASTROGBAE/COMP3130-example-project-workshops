@@ -17,37 +17,31 @@ import AppTextInput from '../components/AppTextInput';
 const data = DataManager.getInstance();
 
 function RegisterScreen({navigation}) {
-    const [selectedImage, setSelectedImage] = React.useState(null);
 
+    let imageSize = 90 // size in radius of account img
+    let imagePath = 0 // image path for user image
+    // imagePicker code
+    const [selectedImage, setSelectedImage] = React.useState(null);
     let openImagePickerAsync = async () => {
         let permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
-
         if (permissionResult.granted === false) {
         alert('Permission to access camera roll is required!');
         return;
         }
-
         let pickerResult = await ImagePicker.launchImageLibraryAsync();
-
         if (pickerResult.cancelled === true) {
         return;
         }
-
         setSelectedImage({ localUri: pickerResult.uri });
     };
 
-    if (selectedImage !== null) {
-        return (
-        <View style={styles.container}>
-            <Image
-            source={{ uri: selectedImage.localUri }}
-            style={styles.thumbnail}
-            />
-        </View>
-        );
+    if (selectedImage !== null) { // if image selected
+        imagePath = { uri: selectedImage.localUri }; // add image to be added to account at submission
+    } else { // if no image selected, use user generic img
+        imagePath = require('../assets/generic-user.bmp');
     }
       
-    let schema = yup.object().shape( // yup validation stuff
+    let schema = yup.object().shape( // yup validation code for name, email and ps
         {
             name: yup.string().required().min(1).max(14).label("Name"),
             email: yup.string().required().email().label("Email"),
@@ -59,15 +53,23 @@ function RegisterScreen({navigation}) {
         <AppScreen statusBar={false}>
             <View style={{flex:0.1}}></View>
             <View style={styles.container}>
+            <View style={{flex:0.3}}></View>
             <TouchableOpacity onPress={openImagePickerAsync}>
+                <Image source={imagePath}
+                    style={{width: imageSize, 
+                    height: imageSize, 
+                    borderRadius: 
+                    imageSize/2}}/>
                 <MaterialCommunityIcons 
-                    name={'star-four-points'} 
-                    size={40} color={AppColors.primary}/>
+                    name={'plus-circle'} 
+                    size={30} color={AppColors.primary}
+                    style={{position: 'absolute'}}/>
             </TouchableOpacity>
+            <View style={{flex:0.1}}></View>
             <Formik
                     initialValues={{ name: '', email: '', password:'', }}
                     onSubmit={values => {
-                        data.createUser(values.name, values.email);
+                        data.createUser(values.name, values.email, imagePath);
                         console.log("User created: " + values.name + ", " + values.email);
                         navigation.navigate('Start')
                     }}

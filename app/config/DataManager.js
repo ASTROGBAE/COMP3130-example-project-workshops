@@ -147,11 +147,11 @@ export default class DataManager {
     }
 
     // TODO make this more complicated!
-    createUser(_userName, _userEmail) {
+    createUser(_userName, _userEmail, _userImagePath) {
         this.userName = _userName;
         this.userEmail = _userEmail;
         this.userJoinedDate=new Date(); // get current date
-        this.userImagePath=require('../assets/red-spot.jpeg'); // TODO add custom image
+        this.userImagePath=_userImagePath; // TODO add custom image
     }
 
 }
