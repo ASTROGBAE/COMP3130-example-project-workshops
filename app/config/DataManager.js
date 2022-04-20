@@ -75,6 +75,23 @@ export default class DataManager {
         return null;
     }
 
+    // rreturn list of categories that this memory exists within
+    getMemoryCategories(id) {
+        let cat = [] // list of matching categories to return
+        for (var key in this.categories) { // loop to add category if it exists
+            if (this.categories.hasOwnProperty(key)) {
+                for (let member in this.categories[key]['memoryIDs']) { // search memory IDs
+                    if (member == id) { // if match found, add category to list, end search loop
+                        console.log("tada!")
+                        cat.push(this.categories[key])
+                        break;
+                    }
+                }
+            }
+        }
+        return cat;
+    }
+
     // TODO add edge case for when categories empty!
     // return list of categories with random thumbnail from list
     getCategoryList() {

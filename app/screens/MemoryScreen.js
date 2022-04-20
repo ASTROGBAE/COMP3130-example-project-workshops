@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import { Dimensions, Image, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {MaterialCommunityIcons} from '@expo/vector-icons'
 import ImageView from "react-native-image-viewing";
+import { FlatList } from 'react-native-gesture-handler';
 
 import AppScreen from '../components/AppScreen';
 import AppColors from "../config/AppColors";
@@ -62,7 +63,13 @@ function MemoryScreen({route, navigation}) {
                             name = {'view-grid'} 
                             size={26} 
                             color= {AppColors.primary}/>
-                        <AppCatButton title = 'Category'/>
+                        <FlatList style={{padding:4, flex:1}}
+                            data = {data.getMemoryCategories(id)}
+                            keyExtractor={(item) => item.id}
+                            numColumns={2}
+                            renderItem = {({item}) =>
+                            <AppCatButton title = {item.title}/>
+                        }/>
                     </View>
                 </View>
             </View>
