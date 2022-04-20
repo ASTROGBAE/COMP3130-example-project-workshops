@@ -36,6 +36,7 @@ function TabNavigator() {
         name="Home" 
         component={HomeScreen} 
         options={{
+          unmountOnBlur: true,
           tabBarLabel:() => {return null},
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="home-variant" color={color} size={40} />
@@ -44,6 +45,7 @@ function TabNavigator() {
       <Tab.Screen 
         name="Categories" 
         component={CategoriesScreen} options={{
+          unmountOnBlur: true,
           tabBarLabel:() => {return null},
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="view-grid" color={color} size={40} />
@@ -62,6 +64,7 @@ function TabNavigator() {
         name="History" 
         component={HistoryScreen}
           options={{
+            unmountOnBlur: true,
             tabBarLabel:() => {return null},
             tabBarIcon: ({ color, size }) => (
               <MaterialCommunityIcons name="history" color={color} size={40} />
@@ -70,6 +73,7 @@ function TabNavigator() {
         name="Account" 
         component={AccountScreen}
         options={{
+          unmountOnBlur: true,
           tabBarLabel:() => {return null},
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="account-circle" color={color} size={40} />
