@@ -107,6 +107,14 @@ function RegisterScreen({navigation}) {
                         />
                         {touched.password && <AppText title={errors.password} style={{color:'red', fontSize:14}}/>}
                         <AppButton onPress={handleSubmit} title="Register" />
+                        <View style={{flexDirection:'row', justifyContent:'center'}}>
+                            <AppText title={'Already have an account? '} style={styles.subtitle}/>
+                            <TouchableOpacity onPress={() => {
+                                navigation.navigate('Login')
+                            }}>
+                                <AppText title={'Login here'} style={styles.title}/>
+                            </TouchableOpacity>
+                        </View>
                     </View>
                     )}
                 </Formik>
@@ -126,7 +134,13 @@ const styles = StyleSheet.create({
         width: 300,
         height: 300,
         resizeMode: "contain"
-      }
+    },
+    title: {
+        fontWeight:'bold',
+        color:AppColors.primary
+    }, subtitle: {
+        color:AppColors.offBlack
+    }
 })
 
 export default RegisterScreen;

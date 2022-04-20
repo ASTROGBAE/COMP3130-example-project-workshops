@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, ImageBackground, Platform, Alert } from 'react-native';
+import { TouchableOpacity, StyleSheet, View, ImageBackground, Platform, Alert } from 'react-native';
 import {Formik} from 'formik'; // formik used here!
 import * as yup from 'yup';
 
@@ -60,6 +60,14 @@ function LoginScreen({navigation}) {
                         {touched.password && <AppText title={errors.password} style={{color:'red', fontSize:16}}/>}
                         <AppButton onPress={() => navigation.navigate('Start')} 
                         title="Login" />
+                        <View style={{flexDirection:'row', justifyContent:'center'}}>
+                            <AppText title={'Don\'t have an account? '} style={styles.subtitle}/>
+                            <TouchableOpacity onPress={() => {
+                                navigation.navigate('Register')
+                            }}>
+                                <AppText title={'Register here'} style={styles.title}/>
+                            </TouchableOpacity>
+                        </View>
                     </View>
                     )}
                 </Formik>
@@ -76,6 +84,12 @@ const styles = StyleSheet.create({
         backgroundColor: AppColors.white,
         justifyContent: "center",
         alignItems: "center"
+    },
+    title: {
+        fontWeight:'bold',
+        color:AppColors.primary
+    }, subtitle: {
+        color:AppColors.offBlack
     }
 })
 
