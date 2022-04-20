@@ -11,6 +11,7 @@ export default class DataManager {
         this.userPassWord = "";
         this.userJoinedDate="";
         this.userImagePath="";
+        this.new_id = 0;
       }
 
     memories = [
@@ -36,6 +37,8 @@ export default class DataManager {
             date: new Date("2021-01-03"),
         }
     ]
+
+    new_id = this.memories.length;
 
     categories = [
         {
@@ -152,6 +155,17 @@ export default class DataManager {
         this.userEmail = _userEmail;
         this.userJoinedDate=new Date(); // get current date
         this.userImagePath=_userImagePath; // TODO add custom image
+    }
+
+    createMemory(_image, _title, _description) {
+        this.memories.push({
+            id: this.new_id,
+            image: _image,
+            title: _title,
+            desc: _description,
+            date: new Date(),
+        })
+        this.new_id ++;
     }
 
 }
