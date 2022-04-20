@@ -15,6 +15,7 @@ import AppTextInput from '../components/AppTextInput';
 // TODO onPress={() => navigation.navigate('Details')}
 
 const data = DataManager.getInstance();
+const develop = true; // boolean for autofill for development mode
 
 function RegisterScreen({navigation}) {
 

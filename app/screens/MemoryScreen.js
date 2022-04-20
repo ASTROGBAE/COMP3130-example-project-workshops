@@ -23,6 +23,9 @@ function MemoryScreen({route, navigation}) {
     const [visible, setIsVisible] = useState(false);
     return (
         <AppScreen statusBar={false}>
+            <AppBackTitle 
+            onPress={() => navigation.navigate('Options')} 
+            onBack={() => navigation.navigate('Home')}/>
             <TouchableOpacity style={styles.container} onPress={() => setIsVisible(true)}>
                 <Image source={memory.image} style={styles.container} resizeMode='cover'/>
             </TouchableOpacity>
@@ -33,9 +36,6 @@ function MemoryScreen({route, navigation}) {
             onRequestClose={() => setIsVisible(false)}
             style={{flex:1}}
             />
-            <AppBackTitle 
-            onPress={() => navigation.navigate('Options')} 
-            onBack={() => navigation.navigate('Home')}/>
         </AppScreen>
     );
 }

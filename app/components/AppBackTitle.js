@@ -12,9 +12,9 @@ function AppBackTitle({onPress, onBack}) {
     return (
         <View style={styles.container}>
             <TouchableOpacity onPress={onBack} style={styles.button}>
-                <MaterialCommunityIcons name="cog" color={AppColors.white} size={40} />
+                <MaterialCommunityIcons name="arrow-left" color={AppColors.white} size={40} />
             </TouchableOpacity>
-            <View style={{width:imageWidth*0.45}}></View>
+            <View style={{width:imageWidth*0.65}}></View>
             <TouchableOpacity onPress={onPress} style={styles.button}>
                 <MaterialCommunityIcons name="cog" color={AppColors.white} size={40} />
             </TouchableOpacity>
@@ -25,11 +25,10 @@ function AppBackTitle({onPress, onBack}) {
 const styles = StyleSheet.create({
     container:{
         flex: 0.1,
+        width:'100%',
         alignItems:'center',
         justifyContent:'center',
         flexDirection:'row',
-        position:'absolute',
-        backgroundColor:'red'
     },
     title: {
         fontSize: 30,
