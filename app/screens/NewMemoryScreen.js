@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Dimensions, Image, StyleSheet, TouchableOpacity, View} from 'react-native';
+import { Dimensions, Image, StyleSheet, TouchableOpacity, View, Alert} from 'react-native';
 import {MaterialCommunityIcons} from '@expo/vector-icons'
 import {Formik} from 'formik'; // formik used here!
 import * as yup from 'yup';
 import * as ImagePicker from 'expo-image-picker';
+import { FlatList } from 'react-native-gesture-handler';
 
 import AppScreen from '../components/AppScreen';
 import AppColors from "../config/AppColors";
@@ -17,6 +18,11 @@ import DataManager from '../config/DataManager';
 let data = DataManager.getInstance();
 
 function NewMemoryScreen({navigation}) {
+    // method for deleting details
+    let deleteItemById = id => () => {
+        const filteredData = this.state.data.filter(item => item.id !== id);
+        this.setState({ data: filteredData });
+    }
     // schema 
     let schema = yup.object().shape( // yup validation code for title, details and date
         {
@@ -78,6 +84,53 @@ function NewMemoryScreen({navigation}) {
                             onChangeText = {handleChange("desc")}
                         />
                         {touched.desc && <AppText title={errors.desc} style={{color:'red', fontSize:14}}/>}
+                        <View style={styles.categorycontainer}>
+                            <MaterialCommunityIcons name = {'view-grid'} size={26} color= {AppColors.primary}/>
+                            <View style={{flex:1}}>
+                                <FlatList style={{padding:4, flex:1}}
+                                    data = {data.getMemoryCategories(id)}
+                                    keyExtractor={(item) => item.id}
+                                    numColumns={2}
+                                    renderItem = {({item}) =>
+                                    <AppCatButton title = {item.title} onPress = {() => {
+                                        Alert.alert(
+                                            "Remove from " + item.title,
+                                            "This action will remove this memory this category. Are you sure?",
+                                            [
+                                                {
+                                                  text: "Cancel",
+                                                  onPress: () => console.log("Cancel Pressed"),
+                                                  style: "cancel"
+                                                },
+                                                { text: "OK", onPress: () => {
+                                                    deleteItemById(item.id);
+                                                    console.log("OK Pressed");
+                                                } }
+                                              ]
+                                        )
+                                    }}/>
+                                }/>
+                            </View>
+                            <View style={{flex:0.1, alignItems:'flex-end'}}>
+                                <TouchableOpacity onPress={
+                                    () => {
+                                        Alert.alert(
+                                            "Under Construction",
+                                            "Add category function is under construction.",
+                                            [
+                                                {
+                                                  text: "Ok",
+                                                  onPress: () => console.log("Cancel Pressed"),
+                                                  style: "cancel"
+                                                }
+                                              ]
+                                        )
+                                }}>
+                                    <MaterialCommunityIcons name = {'plus-circle'} size={26} color= {AppColors.primary}/>
+                                </TouchableOpacity>
+
+                            </View>
+                        </View>
                         <AppButton onPress={handleSubmit} title="Create Memory" />
                     </View>
                     )}
@@ -110,7 +163,7 @@ const styles = StyleSheet.create({
         alignItems: "center"
     },
     container: {
-        flex:0.7,
+        flex:1,
         width:'100%',
         backgroundColor: AppColors.white,
         justifyContent: "center",
@@ -124,7 +177,16 @@ const styles = StyleSheet.create({
         fontSize:18,
     }, edit : {
         alignItems:'flex-end'
-    }
+    }, categorycontainer: { // empty space around text input
+        backgroundColor: '#cfcfcf',
+        flexDirection:'row',
+        alignItems:'center',
+        borderRadius: 9,
+        padding: 10,
+        marginVertical: 10,
+        flex:0.15,
+        height:'10%',
+    }, 
 })
 
 export default NewMemoryScreen;
