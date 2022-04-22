@@ -82,8 +82,8 @@ export default class DataManager {
             if (this.categories.hasOwnProperty(key)) {
                 for (let member in this.categories[key]['memoryIDs']) { // search memory IDs
                     if (member == id) { // if match found, add category to list, end search loop
-                        console.log("tada!")
-                        cat.push(this.categories[key])
+                        console.log(this.categories[member])
+                        cat.push(this.categories[member])
                         break;
                     }
                 }

@@ -92,23 +92,7 @@ function NewMemoryScreen({navigation}) {
                                     keyExtractor={(item) => item.id}
                                     numColumns={2}
                                     renderItem = {({item}) =>
-                                    <AppCatButton title = {item.title} onPress = {() => {
-                                        Alert.alert(
-                                            "Remove from " + item.title,
-                                            "This action will remove this memory this category. Are you sure?",
-                                            [
-                                                {
-                                                  text: "Cancel",
-                                                  onPress: () => console.log("Cancel Pressed"),
-                                                  style: "cancel"
-                                                },
-                                                { text: "OK", onPress: () => {
-                                                    deleteItemById(item.id);
-                                                    console.log("OK Pressed");
-                                                } }
-                                              ]
-                                        )
-                                    }}/>
+                                    <AppCatButton title = {item.title}/>
                                 }/>
                             </View>
                             <View style={{flex:0.1, alignItems:'flex-end'}}>
