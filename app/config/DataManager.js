@@ -174,6 +174,7 @@ export default class DataManager {
         this.userImagePath=_userImagePath; // TODO add custom image
     }
 
+    // create new memory and return id
     createMemory(_image, _title, _description) {
         this.memories.push({
             id: this.new_id,
@@ -183,6 +184,7 @@ export default class DataManager {
             date: new Date(),
         })
         this.new_id ++;
+        return this.new_id--;
     }
 
 }

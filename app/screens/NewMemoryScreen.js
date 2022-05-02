@@ -17,7 +17,10 @@ import DataManager from '../config/DataManager';
 
 let data = DataManager.getInstance();
 
+// TODO add edit functionality
+
 function NewMemoryScreen({navigation}) {
+    // field for checking if edit or not
     // method for deleting details
     let deleteItemById = id => () => {
         const filteredData = this.state.data.filter(item => item.id !== id);
@@ -48,8 +51,11 @@ function NewMemoryScreen({navigation}) {
           setSelectedImage({ localUri: pickerResult.uri });
         };
       
-        if (selectedImage !== null) {
-            let imagePath = { uri: selectedImage.localUri };
+        if (selectedImage !== null) { // image selected!
+            let imagePath = { uri: selectedImage.localUri }; // add image path
+
+            let newId = data.createMemory(imagePath, "", "") // create memory
+            let newMemory = data.getMemory(newId) // get memory reference
           return (
             <AppScreen statusBar={true}>
                 <View style={styles.container}>
@@ -60,7 +66,8 @@ function NewMemoryScreen({navigation}) {
                 <Formik
                     initialValues={{ title: '', desc: ''}}
                     onSubmit={values => {
-                        data.createMemory(imagePath, values.title, values.desc);
+                        newMemory.title = values.title
+                        newMemory.desc = values.desc // add values to existing object
                         console.log("Memory created: " + values.title + ", " + values.desc);
                         navigation.navigate('Home');
                     }}
@@ -88,7 +95,7 @@ function NewMemoryScreen({navigation}) {
                             <MaterialCommunityIcons name = {'view-grid'} size={26} color= {AppColors.primary}/>
                             <View style={{flex:1}}>
                                 <FlatList style={{padding:4, flex:1}}
-                                    data = {data.getMemoryCategories(id)}
+                                    data = {data.getMemoryCategories(newMemory.id)}
                                     keyExtractor={(item) => item.id}
                                     numColumns={2}
                                     renderItem = {({item}) =>
