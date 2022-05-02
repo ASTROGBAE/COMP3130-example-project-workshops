@@ -5,6 +5,8 @@ import {Formik} from 'formik'; // formik used here!
 import * as yup from 'yup';
 import * as ImagePicker from 'expo-image-picker';
 import { FlatList } from 'react-native-gesture-handler';
+import { NavigationContainer } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
 import AppScreen from '../components/AppScreen';
 import AppColors from "../config/AppColors";
@@ -43,7 +45,6 @@ function NewMemoryScreen({navigation}) {
         }
     
         let pickerResult = await ImagePicker.launchImageLibraryAsync();
-        console.log(pickerResult);
         if (pickerResult.cancelled === true) {
             return;
           }
@@ -65,12 +66,7 @@ function NewMemoryScreen({navigation}) {
                 />
                 <Formik
                     initialValues={{ title: '', desc: ''}}
-                    onSubmit={values => {
-                        newMemory.title = values.title
-                        newMemory.desc = values.desc // add values to existing object
-                        console.log("Memory created: " + values.title + ", " + values.desc);
-                        navigation.navigate('Home');
-                    }}
+                    onSubmit={() => navigation.navigate('Home')}
                     validationSchema={schema}
                 >
                     {({ handleChange, handleSubmit, errors, setFieldTouched, touched }) => (
@@ -94,6 +90,7 @@ function NewMemoryScreen({navigation}) {
                         <View style={styles.categorycontainer}>
                             <MaterialCommunityIcons name = {'view-grid'} size={26} color= {AppColors.primary}/>
                             <View style={{flex:1}}>
+                                {/*
                                 <FlatList style={{padding:4, flex:1}}
                                     data = {data.getMemoryCategories(newMemory.id)}
                                     keyExtractor={(item) => item.id}
@@ -101,6 +98,7 @@ function NewMemoryScreen({navigation}) {
                                     renderItem = {({item}) =>
                                     <AppCatButton title = {item.title}/>
                                 }/>
+                            */}
                             </View>
                             <View style={{flex:0.1, alignItems:'flex-end'}}>
                                 <TouchableOpacity onPress={
@@ -137,7 +135,7 @@ function NewMemoryScreen({navigation}) {
             <View style ={styles.buttoncontainer}>
                 <AppButton onPress={openImagePickerAsync} title="Add Memory" />
             </View>
-            
+
         </AppScreen>
     );
 }
