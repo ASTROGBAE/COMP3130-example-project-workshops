@@ -1,18 +1,24 @@
-import { StatusBar } from 'expo-status-bar';
-import {React} from 'react';
-import { StyleSheet, View} from 'react-native';
+import React from 'react';
+import { TouchableOpacity, StyleSheet, View, ImageBackground, Platform, Alert } from 'react-native';
 import {Formik} from 'formik'; // formik used here!
 import * as yup from 'yup';
 
-import AppText from '../components/AppText';
 import AppButton from '../components/AppButton'; 
 import AppScreen from '../components/AppScreen';
-import AppTextInput from '../components/AppTextInput'; 
-import {MaterialCommunityIcons} from '@expo/vector-icons'
-import AppColors from '../config/AppColors';
-import { useNavigation } from '@react-navigation/native';
+
+import AppColors from "../config/AppColors";
+import DataManager from '../config/DataManager';
+import AppLogo from '../components/AppLogo'; 
+import AppClouds from '../components/AppClouds'; 
+import AppText from '../components/AppText';
+import AppTextInput from '../components/AppTextInput';
+
+// TODO onPress={() => navigation.navigate('Details')}
+
+const data = DataManager.getInstance();
 
 function LoginScreen({navigation}) {
+    data.createUser("Jacob", "jacob@email.com"); // TODO test, add better one
 
     let schema = yup.object().shape( // yup validation stuff
         {
@@ -22,13 +28,10 @@ function LoginScreen({navigation}) {
     );
 
     return (
-        <AppScreen>
-            <View style={styles.background}>
-                <MaterialCommunityIcons name={'account'} size={80} color={AppColors.white}/>
-                <AppText title={'Login'}/>
-                <StatusBar style="auto" />
-
-                <Formik
+        <AppScreen statusBar={false}>
+            <View style={{flex:0.1}}></View>
+            <View style={styles.container}>
+            <Formik
                     initialValues={{ email: '', password:'', }}
                     onSubmit={values => console.log(values)}
                     validationSchema={schema}
@@ -39,7 +42,6 @@ function LoginScreen({navigation}) {
                             autoCapitalize="none"
                             autoCorrect={false}
                             icon="email"
-                            placeholder="Email Address"
                             keyboardType="email-address"
                             textContentType="emailAddress"
                             onBlur= {() => setFieldTouched("email")}
@@ -50,31 +52,44 @@ function LoginScreen({navigation}) {
                             autoCapitalize="none"
                             autoCorrect={false}
                             icon="lock"
-                            placeholder="Password"
                             secureTextEntry={true}
                             textContentType="password"
                             onBlur= {() => setFieldTouched("password")}
                             onChangeText = {handleChange("password")}
                         />
                         {touched.password && <AppText title={errors.password} style={{color:'red', fontSize:16}}/>}
-                        <AppButton onPress={handleSubmit} title="Submit" />
+                        <AppButton onPress={() => navigation.navigate('Start')} 
+                        title="Login" />
+                        <View style={{flexDirection:'row', justifyContent:'center'}}>
+                            <AppText title={'Don\'t have an account? '} style={styles.subtitle}/>
+                            <TouchableOpacity onPress={() => {
+                                navigation.navigate('Register')
+                            }}>
+                                <AppText title={'Register here'} style={styles.title}/>
+                            </TouchableOpacity>
+                        </View>
                     </View>
                     )}
                 </Formik>
             </View>
+            <View style={{flex:0.4}}></View>
         </AppScreen>
     );
 }
 
 const styles = StyleSheet.create({
-    background:{
-        flex: 1,
+    container: {
+        flex:0.5,
+        width:'100%',
+        backgroundColor: AppColors.white,
         justifyContent: "center",
-        alignItems: "center",
-        width:"100%"
+        alignItems: "center"
     },
-    errorText:{
-        color:'red'
+    title: {
+        fontWeight:'bold',
+        color:AppColors.primary
+    }, subtitle: {
+        color:AppColors.offBlack
     }
 })
 

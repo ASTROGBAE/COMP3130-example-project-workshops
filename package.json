@@ -10,21 +10,29 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@react-navigation/bottom-tabs": "^6.3.1",
     "@react-navigation/native": "^6.0.8",
     "@react-navigation/stack": "^6.1.1",
     "expo": "~44.0.0",
+    "expo-linear-gradient": "~11.0.3",
     "expo-status-bar": "~1.2.0",
     "formik": "^2.2.9",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-native": "0.64.3",
+    "react-native-gesture-handler": "~2.1.0",
+    "react-native-image-viewing": "^0.2.2",
+    "react-native-linear-gradient": "^2.5.6",
+    "react-native-paper": "^4.12.0",
+    "react-native-snap-carousel": "^3.9.1",
     "react-native-vector-icons": "^9.1.0",
     "react-native-web": "0.17.1",
     "yup": "^0.32.11",
-    "react-native-gesture-handler": "~2.1.0"
+    "expo-image-picker": "~12.0.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.9"
+    "@babel/core": "^7.12.9",
+    "@iconify/react": "^3.2.1"
   },
   "private": true
 }

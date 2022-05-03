@@ -6,24 +6,30 @@ import {MaterialCommunityIcons} from '@expo/vector-icons'
 import AppColors from '../config/AppColors'; 
 import AppText from '../components/AppText';
 
+// TODO text input not working?
+
 function AppTextInput({icon, ...otherProps}) {
     return (
         <View style={styles.container}>
-            {icon && <MaterialCommunityIcons name = {icon} size={22} color= {AppColors.black}/>}
-            <TextInput style={AppText.text} {...otherProps}/>
+                {icon && <MaterialCommunityIcons name = {icon} size={26} color= {AppColors.primary}/>}
+            <TextInput style={styles.textInput} {...otherProps}/>
         </View>
     );
 }
 
 export default AppTextInput;
-
+// TODO refactor style names
 const styles = StyleSheet.create({
-    container: {
-        backgroundColor: AppColors.white,
-        flexDirection: 'row',
-        borderRadius: 25,
+    container: { // empty space around text input
+        backgroundColor: '#cfcfcf',
+        flexDirection:'row',
+        borderRadius: 9,
         padding: 10,
         marginVertical: 10,
-        width:'100%',
-    }
+        width:"100%",
+    }, 
+    textInput: { // grey area
+        //alignItems: "center",
+        width:"80%",
+    },
 })

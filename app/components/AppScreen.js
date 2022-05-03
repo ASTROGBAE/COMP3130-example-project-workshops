@@ -1,23 +1,41 @@
 import React from 'react';
-import { SafeAreaView, StyleSheet } from 'react-native';
-import Constants from 'expo-constants';
+import { Platform, StatusBar, StyleSheet, View, SafeAreaView } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 
 import AppColors from "../config/AppColors";
 
-function AppScreen({children, style}) {
+// TODO figure out how to deal with iOS for statusBar?
+
+let containerFlex = 0.92
+
+function AppScreen({children, statusBar}) {
+    if (!statusBar) {
+        containerFlex=1
+    }
     return (
-        <SafeAreaView style = {[styles.screen,style]}> 
-            {children}
-        </SafeAreaView>
+        <View style = {styles.screen}> 
+            {Platform.OS === 'android' ?
+            <StatusBar backgroundColor={AppColors.primary}/>:null}
+            <LinearGradient
+                colors={[AppColors.primary, AppColors.tertiary+80]}
+                start={{x: 0.5, y: 0}}
+                end={{x: 0.5, y: 1}}
+                style={{flex:1}}>
+                <SafeAreaView style = {styles.container}>
+                    {children}
+                </SafeAreaView>
+            </LinearGradient>
+        </View>
     );
 }
 
 const styles = StyleSheet.create({
     screen:{
         flex:1,
-        marginTop: Constants.statusBarHeight,
         backgroundColor: AppColors.primary,
-        justifyContent: 'center',
+    }, 
+    container:{
+        flex: containerFlex,
     }
 })
 
