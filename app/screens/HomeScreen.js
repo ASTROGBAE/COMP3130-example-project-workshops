@@ -21,6 +21,11 @@ function HomeScreen({navigation}) {
 
     // below is the gemeraton of a random selection of memories, chosen once at random until all are shown.
     let data = DataManager.getInstance();
+
+    let m = ""
+    for (let memory in data.memories) {
+        m += memory[0]+", "+memory[1]+"\n"
+    }
     
     // TODO get random function working, giving up for now... >:(
 
@@ -28,7 +33,7 @@ function HomeScreen({navigation}) {
         <AppScreen statusBar={true}>
             <AppTitle 
             title={'Home'} 
-            onPress={() => navigation.navigate('Options')} />
+            onPress={() => navigation.navigate('History')} />
             <Carousel 
                 layout={'default'}
                 windowSize = {Dimensions.get('window').width*0.9}

@@ -4,17 +4,7 @@
 export default class DataManager {
     static myInstance = null;
 
-    // constructor containing class fields
-    constructor() {
-        this.userName = "";
-        this.userEmail
-        this.userPassWord = "";
-        this.userJoinedDate="";
-        this.userImagePath="";
-        this.new_id = 0;
-      }
-
-    memories = [
+    memories = [ // initial sample data
         {
             id: 0,
             image: require('../assets/blue-mars.jpeg'),
@@ -37,9 +27,6 @@ export default class DataManager {
             date: new Date("2021-01-03"),
         }
     ]
-
-    new_id = this.memories.length;
-
     categories = [
         {
             id: 0,
@@ -54,6 +41,16 @@ export default class DataManager {
             image: 0,
         }
     ]
+
+    // constructor containing class fields
+    constructor() {
+        this.userName = "";
+        this.userEmail
+        this.userPassWord = "";
+        this.userJoinedDate="";
+        this.userImagePath="";
+        this.new_id = this.categories.length;
+      }
 
     // get singleton instance of object for all classes
     static getInstance() {
@@ -82,7 +79,6 @@ export default class DataManager {
             if (this.categories.hasOwnProperty(key)) {
                 for (let member in this.categories[key]['memoryIDs']) { // search memory IDs
                     if (member == id) { // if match found, add category to list, end search loop
-                        console.log(this.categories[member])
                         cat.push(this.categories[member])
                         break;
                     }
@@ -176,6 +172,8 @@ export default class DataManager {
 
     // create new memory and return id
     createMemory(_image, _title, _description) {
+        this.new_id ++;
+        // TODO will need to make this more complicated, what if someone removes an object?
         this.memories.push({
             id: this.new_id,
             image: _image,
@@ -183,8 +181,7 @@ export default class DataManager {
             desc: _description,
             date: new Date(),
         })
-        this.new_id ++;
-        return this.new_id--;
+        return this.new_id;
     }
 
 }

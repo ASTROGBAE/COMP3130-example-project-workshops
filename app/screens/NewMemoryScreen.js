@@ -23,11 +23,10 @@ let data = DataManager.getInstance();
 
 function NewMemoryScreen({navigation}) {
     // field for checking if edit or not
-    // method for deleting details
-    let deleteItemById = id => () => {
-        const filteredData = this.state.data.filter(item => item.id !== id);
-        this.setState({ data: filteredData });
-    }
+    // boolean for showing new memory or not
+    let addedImage = false;
+    let imagePath = "" // empty for later use
+    let newMemory = null // empty for later use in making new memoru
     // schema 
     let schema = yup.object().shape( // yup validation code for title, details and date
         {
@@ -53,10 +52,13 @@ function NewMemoryScreen({navigation}) {
         };
       
         if (selectedImage !== null) { // image selected!
-            let imagePath = { uri: selectedImage.localUri }; // add image path
+            imagePath = { uri: selectedImage.localUri }; // add image path
 
             let newId = data.createMemory(imagePath, "", "") // create memory
-            let newMemory = data.getMemory(newId) // get memory reference
+            newMemory = data.getMemory(newId) // get memory reference
+            addedImage = true;
+        }
+        if (addedImage) { // if image selected and editing before submission
           return (
             <AppScreen statusBar={true}>
                 <View style={styles.container}>
@@ -66,7 +68,13 @@ function NewMemoryScreen({navigation}) {
                 />
                 <Formik
                     initialValues={{ title: '', desc: ''}}
-                    onSubmit={() => navigation.navigate('Home')}
+                    onSubmit={values => {
+                        newMemory.title = values.title
+                        newMemory.desc = values.desc // add values to existing object
+                        console.log("Memory created: " + values.title + ", " + values.desc);
+                        addedImage = false; // set to false and remove edit screen
+                        navigation.navigate("Home"); // TODO cannot do Home screen for some reason!
+                    }}
                     validationSchema={schema}
                 >
                     {({ handleChange, handleSubmit, errors, setFieldTouched, touched }) => (
@@ -128,16 +136,17 @@ function NewMemoryScreen({navigation}) {
             </AppScreen>
           );
         }  
-
-    return (
-        <AppScreen statusBar={true}>
-            <View style ={{flex:0.2}}></View>
-            <View style ={styles.buttoncontainer}>
-                <AppButton onPress={openImagePickerAsync} title="Add Memory" />
-            </View>
-
-        </AppScreen>
-    );
+        else { // !addedImage
+            return (
+                <AppScreen statusBar={true}>
+                    <View style ={{flex:0.2}}></View>
+                    <View style ={styles.buttoncontainer}>
+                        <AppButton onPress={openImagePickerAsync} title="Add Memory" />
+                    </View>
+    
+                </AppScreen>
+            );
+        }
 }
 
 const styles = StyleSheet.create({

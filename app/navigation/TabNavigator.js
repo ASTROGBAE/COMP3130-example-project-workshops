@@ -55,6 +55,7 @@ function TabNavigator() {
         name="New Memory" 
         component={NewMemoryScreen} 
         options={{
+          unmountOnBlur: true,
           tabBarLabel:() => {return null},
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="plus-circle" color={color} size={40} />
