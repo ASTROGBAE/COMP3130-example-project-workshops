@@ -184,4 +184,17 @@ export default class DataManager {
         return this.new_id;
     }
 
+    // returns true if data contains the parameter image (must be number address)
+    containsImage(image) {
+        if (typeof image === 'number') { // if image is valid (num)
+            for (var key in this.memories) {
+                if (this.memories.hasOwnProperty(key)) {
+                    if (image === this.memories[key]['image']) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false; // no match of image invalid
+    }
 }

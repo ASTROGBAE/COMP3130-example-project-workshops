@@ -12,6 +12,11 @@ function AppImage({image, title, date, type, onPress}) {
     let imageWidth = Dimensions.get('window').width;
     let imageHeight = Dimensions.get('window').height;
     let gradientHeight = 0;
+    // if all params missing, return null
+    if (!image && !title && !date && !type && !onPress) {
+        console.log("no params present!")
+        return null;
+    }
     // return null if any param is missing (except text-related)
     if (!image || !type || !onPress) {
         return null;
