@@ -1,6 +1,5 @@
 import React from "react";
 import { Dimensions, StyleSheet, TouchableOpacity, View, Image, ImageBackground } from "react-native";
-import { LinearGradient } from 'expo-linear-gradient';
 import DataManager from '../config/DataManager';
 
 import AppColors from "../config/AppColors";
@@ -85,14 +84,6 @@ function AppImage({image, title, date, type, onPress}) {
                         width: imageWidth, 
                         borderRadius:29,
                     }} resizeMode='cover'/>
-                    <LinearGradient 
-                        colors={['#00000000', '#000000']} 
-                        style={{
-                            position:'absolute', 
-                            height : gradientHeight, 
-                            width: imageWidth, 
-                            borderRadius:29}}>
-                    </LinearGradient>
                     {text}
                 </TouchableOpacity>
             </View>
