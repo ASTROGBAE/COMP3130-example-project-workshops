@@ -1,22 +1,27 @@
 import React from "react";
 import { Dimensions, StyleSheet, TouchableOpacity, View, Image, ImageBackground } from "react-native";
 import { LinearGradient } from 'expo-linear-gradient';
+import DataManager from '../config/DataManager';
 
 import AppColors from "../config/AppColors";
 import AppText from "./AppText";
 
-// TODO add fonts to text?
-const imageWidth = Dimensions.get('window').width*0.9;
-const imageHeight = Dimensions.get('window').height*0.9;
-
-// TODO refactor code below, very messy
-
-function AppImage({image, title, subtitle, date, type, onPress}) {
+function AppImage({image, title, date, type, onPress}) {
     // figure out width and height based on type
-    // default 
+    // universal variables to calculate
+    let data = DataManager.getInstance();
     let imageWidth = Dimensions.get('window').width;
     let imageHeight = Dimensions.get('window').height;
     let gradientHeight = 0;
+    // return null if any param is missing (except text-related)
+    if (!image || !type || !onPress) {
+        return null;
+    }
+    // IMAGE logic 
+    if (typeof image !== 'number' || !data.containsImage(image)) { // invalid image input
+        return null;
+    } 
+    // TYPE logic
     if (type === 'Big') {
         imageWidth *= 0.9;
         imageHeight *= 0.9;
@@ -25,7 +30,10 @@ function AppImage({image, title, subtitle, date, type, onPress}) {
         imageWidth *= 0.4;
         imageHeight *= 0.2;
         gradientHeight = imageHeight;
+    } else { // invalid type input
+        return null;
     }
+    // Text logic (can be based on title or date)
     let text = null;
     if (title && date) { // title and date option
         text = (
@@ -65,9 +73,9 @@ function AppImage({image, title, subtitle, date, type, onPress}) {
                 <View style={{height : imageHeight*0.1}}></View>
             </View>
         );
-    }
+    } // if no title or date, will just render without text
     // render items
-    if (title || subtitle || date) {
+    if (title || date) {
         return (
             <View style={styles.container}>
                 <TouchableOpacity onPress={onPress}>
