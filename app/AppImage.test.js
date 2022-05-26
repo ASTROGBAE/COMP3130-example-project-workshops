@@ -6,45 +6,25 @@ import AppImage from './components/AppImage';
 import DataManager from './config/DataManager';
 
 // sample date to use...
-let data = DataManager.getInstance().memories[0];
+let data = DataManager.getInstance().getMemory(0);
+data.image = 0; // mock image coordinate for testing
 
 // Regression test for the functionality of the image component with relation to sample data.
 
 test('No parameters returns null', () => {
-  const image = renderer.create(<AppImage />).toJSON();
-  expect(image).toBe(null);
+  const json = renderer.create(<AppImage />).toJSON();
+  expect(json).toBe(null);
 });
 
-test('Image only returns null', () => {
-  const image = renderer.create(<AppImage 
-    image={data['image']}
+test('A basic small image will display correctly', () => {
+  let pressed = false;
+  // TODO log in all data here and see if it's right...
+  const json = renderer.create(<AppImage 
+    title={data.title}
+    image={data.image}
+    type={'Small'}
+    onPress={() => pressed=true}
   />).toJSON();
-  expect(image).toBe(null);
+  console.log(json)
+  expect(1).toBe(1);
 });
-
-test('Title only returns null', () => {
-  const image = renderer.create(<AppImage 
-    title={data['title']}
-  />).toJSON();
-  expect(image).toBe(null);
-});
-
-test('Title only returns null', () => {
-  const image = renderer.create(<AppImage 
-    title={data['title']}
-  />).toJSON();
-  expect(image).toBe(null);
-});
-
-// test('No parameters returns null', () => {
-//   let imageClicked = false;
-//   const image = renderer.create(
-//     <AppImage 
-//         image={item.image} 
-//         title={item.title} 
-//         date={data.getDateString(item.id)}
-//         type = 'Big'
-//         onPress={() => imageClicked = true}/>
-//   ).toJSON();
-//   expect(1).toBe(1);
-// });
