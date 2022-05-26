@@ -12,20 +12,20 @@ function AppImage({image, title, date, type, onPress}) {
     let imageWidth = Dimensions.get('window').width;
     let imageHeight = Dimensions.get('window').height;
     let gradientHeight = 0;
-    console.log("App image call: "+ image+" "+title+" "+date+" "+type+" "+onPress)
+    //console.log("App image call: "+ image+" "+title+" "+date+" "+type+" "+onPress)
     // if all params missing, return null
     if (image === undefined && title === undefined && date === undefined && type === undefined && onPress === undefined) {
-        console.log("All params missing, returning null")
+        //console.log("All params missing, returning null")
         return null;
     }
     // return null if any param is missing (except text-related)
     if (image === undefined || type === undefined || onPress === undefined) {
-        console.log("Image, type or onPress missing, returning null")
+        //console.log("Image, type or onPress missing, returning null")
         return null;
     }
     // IMAGE logic 
     if (typeof image !== 'number' || !data.containsImage(image)) { // invalid image input
-        console.log("Image invalid, returning null")
+        //console.log("Image invalid, returning null")
         return null;
     } 
     // TYPE logic
@@ -38,7 +38,7 @@ function AppImage({image, title, date, type, onPress}) {
         imageHeight *= 0.2;
         gradientHeight = imageHeight;
     } else { // invalid type input
-        console.log("Invalid type input, returning null")
+        //console.log("Invalid type input, returning null")
         return null;
     }
     // Text logic (can be based on title or date)
@@ -84,7 +84,7 @@ function AppImage({image, title, date, type, onPress}) {
     } // if no title or date, will just render without text
     // render items
     if (title || date) {
-        console.log("Title or date present, returning component");
+        //console.log("Title or date present, returning component");
         return (
             <View style={styles.container}>
                 <TouchableOpacity onPress={onPress}>
@@ -99,7 +99,7 @@ function AppImage({image, title, date, type, onPress}) {
             </View>
         );
     } else {
-    console.log("No text, returning component");
+    //console.log("No text, returning component");
     return (
         <View style={styles.container}>
             <TouchableOpacity>

@@ -18,13 +18,18 @@ test('No parameters returns null', () => {
 
 test('A basic small image will display correctly', () => {
   let pressed = false;
-  // TODO log in all data here and see if it's right...
   const json = renderer.create(<AppImage 
     title={data.title}
     image={data.image}
     type={'Small'}
     onPress={() => pressed=true}
   />).toJSON();
-  console.log(json)
-  expect(1).toBe(1);
+  expect(json).toBeTruthy(); // returned component is not null
+  // image component testing
+  const imageComponent = json.children[0].children[0] // get image component JSON
+  expect(imageComponent.type).toBe('Image'); // image component exists
+  expect(imageComponent.props.source).toBe(data.image); // image source matches
+  // text component testing
+  const textComponent = json.children[0].children[1] // get text component JSON
+  expect(textComponent.children[0].children[0]).toBe(data.title); // title string matches
 });
